@@ -1,7 +1,13 @@
 import {Component} from '@angular/core';
 
+import { ChatWindowComponent } from './chat-window';
+
+import { MessageService, ThreadService, UserService } from './shared';
+
 @Component({
-    selector: 'my-app',
-    template: '<h1>My First Angular 2 App</h1>'
+    selector: 'chat-app',
+    template: '<chat-window></chat-window>',
+    providers: [MessageService, ThreadService, UserService]
 })
-export class AppComponent { }
+export class AppComponent { 
+}
