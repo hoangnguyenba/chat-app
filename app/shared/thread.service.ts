@@ -1,5 +1,5 @@
 import {Injectable, bind} from '@angular/core';
-import {Subject, BehaviorSubject, Observable} from 'rxjs';
+import {Subject, BehaviorSubject, Observable} from 'rxjs/Rx';
 import {Thread, Message, MessageService} from '../shared';
 import * as _ from 'underscore';
 

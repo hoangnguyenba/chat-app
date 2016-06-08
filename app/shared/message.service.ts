@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 
-import {Subject, Observable} from 'rxjs';
+import {Subject, Observable} from 'rxjs/Rx';
 
 import { User } from './user.model';
 import { Thread } from './thread.model';
