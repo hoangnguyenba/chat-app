@@ -20,7 +20,8 @@ import { ChatMessageComponent } from './chat-message.component';
   directives: [ChatMessageComponent,
                FORM_DIRECTIVES],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: 'app/chat-window/chat-window.component.html'
+  templateUrl: 'app/chat-window/chat-window.component.html',
+  styleUrls: ['app/chat-window/chat-window.component.css']
 })
 export class ChatWindowComponent implements OnInit {
   messages: Observable<any>;
@@ -46,13 +47,13 @@ export class ChatWindowComponent implements OnInit {
 
     this.currentUser = this.userService.getCurrentUser();
 
-    this.messages
-      .subscribe(
-        (messages: Array<Message>) => {
-          setTimeout(() => {
-            this.scrollToBottom();
-          });
-        });
+    // this.messages
+    //   .subscribe(
+    //     (messages: Array<Message>) => {
+    //       setTimeout(() => {
+    //         this.scrollToBottom();
+    //       });
+    //     });
   }
 
   onEnter(event: any): void {
@@ -69,10 +70,10 @@ export class ChatWindowComponent implements OnInit {
     this.draftMessage = new Message();
   }
 
-  scrollToBottom(): void {
-    let scrollPane: any = this.el
-      .nativeElement.querySelector('.msg-container-base');
-    scrollPane.scrollTop = scrollPane.scrollHeight;
-  }
+  // scrollToBottom(): void {
+  //   let scrollPane: any = this.el
+  //     .nativeElement.querySelector('.msg-container-base');
+  //   scrollPane.scrollTop = scrollPane.scrollHeight;
+  // }
 
 }
