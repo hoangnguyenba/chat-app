@@ -13,8 +13,11 @@ interface IMessagesOperation extends Function {
   (messages: Message[]): Message[];
 }
 
+declare var io: any;
+
 @Injectable()
 export class MessageService {
+
   // a stream that publishes new messages only once
   newMessages: Subject<Message> = new Subject<Message>();
 
@@ -30,7 +33,14 @@ export class MessageService {
   create: Subject<Message> = new Subject<Message>();
   markThreadAsRead: Subject<any> = new Subject<any>();
 
+  private serverUrl:String = 'http://localhost:3131/';
+  private socket: any;
+
   constructor(private http: Http) {
+
+    this.socket = new io(this.serverUrl);
+
+
     this.messages = this.updates
       // watch the updates and accumulate operations on the messages
       .scan((messages: Message[],
@@ -92,6 +102,10 @@ export class MessageService {
   // an imperative function call to this action stream
   addMessage(message: Message): void {
     this.newMessages.next(message);
+
+    console.log('aaa');
+    this.socket.emit('chat_message', message);
+    console.log('bbb');
   }
 
   getMessages(thread_id: string): Observable<any> {

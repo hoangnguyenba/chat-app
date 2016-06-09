@@ -13,4 +13,8 @@ import { UserService, ThreadService, MessageService } from './shared';
     providers: [HTTP_PROVIDERS, UserService, MessageService, ThreadService]
 })
 export class AppComponent {
+
+    constructor()
+    {
+    }
 }
