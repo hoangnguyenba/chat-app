@@ -23,6 +23,7 @@ export class ThreadService {
   constructor(public messageService: MessageService) {
 
     this.threads = messageService.messages
+      .do((messages) => console.log(messages))
       .map( (messages: Message[]) => {
         let threads: {[key: string]: Thread} = {};
         // Store the message's thread in our accumulator `threads`
@@ -36,6 +37,10 @@ export class ThreadService {
     this.currentThreadMessages = this.currentThread
       .combineLatest(messageService.messages,
                      (currentThread: Thread, messages: Message[]) => {
+        console.log('Thread');
+        console.log(currentThread);
+        console.log('Message');
+        console.log(messages);
         if (currentThread && messages.length > 0) {
           return _.chain(messages)
             .filter((message: Message) =>

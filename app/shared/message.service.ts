@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 
 import {Subject, Observable} from 'rxjs/Rx';
@@ -16,7 +16,7 @@ interface IMessagesOperation extends Function {
 declare var io: any;
 
 @Injectable()
-export class MessageService implements OnInit {
+export class MessageService {
 
   // a stream that publishes new messages only once
   newMessages: Subject<Message> = new Subject<Message>();
@@ -41,6 +41,7 @@ export class MessageService implements OnInit {
 
 
     this.messages = this.updates
+      .do((x)=> console.log('updates1 :' + x))
       // watch the updates and accumulate operations on the messages
       .scan((messages: Message[],
              operation: IMessagesOperation) => {
@@ -68,14 +69,17 @@ export class MessageService implements OnInit {
     // entirely. The pros are that it is potentially clearer. The cons are that
     // the stream is no longer composable.
     this.create
+      .do((x)=> console.log('create :' + x))
       .map( function(message: Message): IMessagesOperation {
         return (messages: Message[]) => {
           return messages.concat(message);
         };
       })
       .subscribe(this.updates);
+      // .subscribe((x) => console.log(x));
 
     this.newMessages
+      .do((x)=> {console.log('newMessages :');console.log(x)})
       .subscribe(this.create);
 
     // similarly, `markThreadAsRead` takes a Thread and then puts an operation
@@ -95,63 +99,20 @@ export class MessageService implements OnInit {
         };
       })
       .subscribe(this.updates);
-
-
-    // this.getMessages('user1:user2').map((data: any): IMessagesOperation => {
-
-    //   var messages_server:Message[] = data.Items.map((item: any) => {
-
-    //     var result: Message = new Message;
-    //     result.sentAt = item.created_at;
-    //     result.author = item.author;
-    //     result.text = item.text;
-    //     result.thread = new Thread(item.thread_id);
-
-    //     return result;
-    //   });
-
-    //   console.log(messages_server);
-
-    //   return (messages: Message[]) => {
-    //     return messages.concat(messages_server);
-    //   };
-    // }).subscribe(this.updates);
-
-    this.getMessages('user1:user2').map((data: any): IMessagesOperation => {
-
-      var messages_server:Message[] = data.Items.map((item: any) => {
-
-        var result: Message = new Message;
-        result.sentAt = item.created_at;
-        result.author = item.author;
-        result.text = item.text;
-        result.thread = new Thread(item.thread_id);
-
-        return result;
-      });
-
-      console.log(messages_server);
-
-      return (messages: Message[]) => {
-        console.log(messages_server);
-        return messages.concat(messages_server);
-      };
-    }).subscribe((data) => {
-      console.log(data);
-    });
-  }
-
-  ngOnInit(): void {
   }
 
   // an imperative function call to this action stream
-  addMessage(message: Message): void {
+  addMessage(message: Message, is_sync: Boolean = true): void {
+
+    console.log(message);
+
     this.newMessages.next(message);
 
-    this.socket.emit('chat_message', message);
+    if(is_sync)
+      this.socket.emit('chat_message', message);
   }
 
-  getMessages(thread_id: string): Observable<any> {
+  getMessages(thread_id: String): Observable<any> {
       return this.http.get(this.serverUrl + 'fetch?thread_id=' + thread_id)
                     .map(this.extractData);
   }

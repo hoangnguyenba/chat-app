@@ -8,6 +8,6 @@ export class UserService {
     constructor() { }
 
     getCurrentUser() {
-        return new User();
+        return new User("user1", "User One");
     }
 }
