@@ -30,13 +30,7 @@ export class AppComponent implements OnInit{
         this.messageService.getMessages('user1:user2').subscribe((data) => {
             var messages_server:Message[] = data.Items.map((item: any) => {
 
-                var message: Message = new Message;
-                message.sentAt = new Date(item.created_at);
-                message.author = new User(item.author);
-                message.text = item.text;
-                message.thread = new Thread(item.thread_id);
-
-                return message;
+                return new Message(item);
             });
 
             this.messageService.updates.next((messages: Message[]) => {
