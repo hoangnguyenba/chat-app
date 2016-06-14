@@ -5,6 +5,9 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import {FORM_DIRECTIVES} from '@angular/common';
+
+// import { CanActivate } from '@angular/router-deprecated';
+
 import {
   MessageService,
   ThreadService,
@@ -12,6 +15,7 @@ import {
 } from '../shared';
 import {Observable} from 'rxjs';
 import {User, Thread, Message} from '../shared';
+import { AuthService } from '../shared/auth.service';
 
 import { ChatMessageComponent } from './chat-message.component';
 
@@ -29,10 +33,13 @@ export class ChatWindowComponent implements OnInit {
   draftMessage: Message;
   currentUser: User;
 
+  test: Boolean = true;
+
   constructor(public messageService: MessageService,
               public threadService: ThreadService,
               public userService: UserService,
-              public el: ElementRef) {
+              public el: ElementRef,
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
