@@ -2,8 +2,8 @@ export class User {
   id: string;
   name:  string;
 
-  constructor(id?: string, name?: string) {
-    this.id = id || null;
-    this.name = name || null;
+  constructor(obj?: any) {
+    this.id          = obj && obj.id                || null;
+    this.name          = obj && obj.name                || null;
   }
 }

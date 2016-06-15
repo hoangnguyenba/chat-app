@@ -49,7 +49,7 @@ export class ChatWindowComponent implements OnInit {
       });
 
     this.userService.getCurrentUser().subscribe((data) => {
-      this.currentUser = new User(data.user.id, data.user.name);
+      this.currentUser = new User(data.user);
     });
 
     this.messages

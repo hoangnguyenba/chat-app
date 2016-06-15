@@ -6,7 +6,6 @@ import { Injector, ReflectiveInjector } from '@angular/core';
 import { ChatWindowComponent } from './chat-window/index';
 import { LoginComponent } from './login/login.component';
 
-import { AuthService } from './shared/auth.service';
 import { AuthRouterOutlet } from './shared/auth-router-outlet.directive';
 import { UserService, ThreadService, MessageService, Thread, Message, User } from './shared';
 

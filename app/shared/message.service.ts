@@ -3,6 +3,8 @@ import { Http, Response } from '@angular/http';
 
 import {Subject, Observable} from 'rxjs/Rx';
 
+import { AuthHttp } from 'angular2-jwt';
+
 import { User } from './user.model';
 import { Thread } from './thread.model';
 import { Message } from './message.model';
@@ -36,7 +38,7 @@ export class MessageService {
   private serverUrl:String = 'http://localhost:3131/';
   private socket: any;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private authHttp: AuthHttp) {
     this.socket = new io(this.serverUrl);
 
 
@@ -113,7 +115,7 @@ export class MessageService {
   }
 
   getMessages(thread_id: String): Observable<any> {
-      return this.http.get(this.serverUrl + 'fetch?thread_id=' + thread_id)
+      return this.authHttp.get(this.serverUrl + 'fetch?thread_id=' + thread_id)
                     .map(this.extractData);
   }
 
