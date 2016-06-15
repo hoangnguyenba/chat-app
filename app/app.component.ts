@@ -31,18 +31,18 @@ export class AppComponent implements OnInit{
     }
 
     ngOnInit(): void {
-        // this.messageService.messages.subscribe(() => ({}));
+        this.messageService.messages.subscribe(() => ({}));
 
         // set "Juliet" as the current user
         // this.userService.setCurrentUser(me);
 
         // create the initial messages
-        this.messageService.getMessages('user1:user2').subscribe((data) => {
+        this.messageService.getMessages('user1:user2')
+          .subscribe((data) => {
             var messages_server:Message[] = data.Items.map((item: any) => {
-
                 return new Message(item);
             });
-
+            
             this.messageService.updates.next((messages: Message[]) => {
                 return messages.concat(messages_server);
             });

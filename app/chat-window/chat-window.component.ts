@@ -60,7 +60,9 @@ export class ChatWindowComponent implements OnInit {
         this.currentThread = thread;
       });
 
-    this.currentUser = this.userService.getCurrentUser();
+    this.userService.getCurrentUser().subscribe((data) => {
+      this.currentUser = new User(data.user.id, data.user.name);
+    });
 
     this.messages
       .subscribe(
@@ -68,12 +70,6 @@ export class ChatWindowComponent implements OnInit {
           setTimeout(() => {
             this.scrollToBottom();
           });
-        });
-
-    this.authHttp.get('http://localhost:3131/is-auth').map((res) => {
-            return res.json();
-        }).subscribe((data) => {
-          console.log(data);
         });
 
   }

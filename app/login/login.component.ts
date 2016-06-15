@@ -25,7 +25,7 @@ export class LoginComponent {
       })
       .subscribe(
         data => {
-          localStorage.setItem('jwt', data.id_token);
+          localStorage.setItem('id_token', data.id_token);
           if(data.status == true)
             this.router.parent.navigateByUrl('/');
         },
