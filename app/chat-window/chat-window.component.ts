@@ -16,11 +16,13 @@ import {
 import { Observable } from 'rxjs';
 import { User, Thread, Message } from '../shared';
 
+import { ChatListComponent } from './chat-list.component';
 import { ChatMessageComponent } from './chat-message.component';
 
 @Component({
   selector: 'chat-window',
   directives: [ChatMessageComponent,
+               ChatListComponent,
                FORM_DIRECTIVES],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: 'app/chat-window/chat-window.component.html',
