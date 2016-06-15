@@ -2,6 +2,8 @@ import { Directive, Attribute, ViewContainerRef, DynamicComponentLoader } from '
 import { Router, RouterOutlet, ComponentInstruction } from '@angular/router-deprecated';
 import { LoginComponent } from '../login/login.component';
 
+import { tokenNotExpired } from 'angular2-jwt';
+
 @Directive({
   selector: 'auth-router-outlet'
 })
@@ -23,10 +25,10 @@ export class AuthRouterOutlet extends RouterOutlet {
 
   activate(instruction: ComponentInstruction) {
     let url = instruction.urlPath;
-    if (!this.publicRoutes[url] && !localStorage.getItem('jwt')) {
-      // todo: redirect to Login, may be there a better way?
+
+    if(!this.publicRoutes[url] && !tokenNotExpired())
       this.parentRouter.navigateByUrl('/login');
-    }
+
     return super.activate(instruction);
   }
 }

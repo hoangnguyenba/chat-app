@@ -8,10 +8,6 @@ import {
 
 import {FORM_DIRECTIVES} from '@angular/common';
 
-import { CanActivate } from '@angular/router-deprecated';
-
-import { AuthHttp } from 'angular2-jwt';
-
 import {
   MessageService,
   ThreadService,
@@ -19,7 +15,6 @@ import {
 } from '../shared';
 import { Observable } from 'rxjs';
 import { User, Thread, Message } from '../shared';
-import { AuthService } from '../shared/auth.service';
 
 import { ChatMessageComponent } from './chat-message.component';
 
@@ -31,11 +26,6 @@ import { ChatMessageComponent } from './chat-message.component';
   templateUrl: 'app/chat-window/chat-window.component.html',
   styleUrls: ['app/chat-window/chat-window.component.css']
 })
-// @CanActivate((next, prev) => {
-//     var injector: Injector = ReflectiveInjector.resolveAndCreate([AuthService, HTTP_PROVIDERS]);
-//     var authService = injector.get(AuthService);
-//     return authService.isAuth().map((data: any) => data.status).do((x:any) => console.log(x)).toPromise();
-// })
 export class ChatWindowComponent implements OnInit {
   messages: Observable<any>;
   currentThread: Thread;
@@ -45,9 +35,7 @@ export class ChatWindowComponent implements OnInit {
   constructor(public messageService: MessageService,
               public threadService: ThreadService,
               public userService: UserService,
-              public el: ElementRef,
-              private authService: AuthService,
-              private authHttp: AuthHttp) {
+              public el: ElementRef) {
   }
 
   ngOnInit(): void {
@@ -73,7 +61,6 @@ export class ChatWindowComponent implements OnInit {
         });
 
   }
-
   onEnter(event: any): void {
     this.sendMessage();
     event.preventDefault();
