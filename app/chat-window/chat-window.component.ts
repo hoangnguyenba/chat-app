@@ -2,19 +2,23 @@ import {
   Component,
   OnInit,
   ElementRef,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  Injector, ReflectiveInjector
 } from '@angular/core';
+
 import {FORM_DIRECTIVES} from '@angular/common';
 
-// import { CanActivate } from '@angular/router-deprecated';
+import { CanActivate } from '@angular/router-deprecated';
+
+import { AuthHttp } from 'angular2-jwt';
 
 import {
   MessageService,
   ThreadService,
   UserService
 } from '../shared';
-import {Observable} from 'rxjs';
-import {User, Thread, Message} from '../shared';
+import { Observable } from 'rxjs';
+import { User, Thread, Message } from '../shared';
 import { AuthService } from '../shared/auth.service';
 
 import { ChatMessageComponent } from './chat-message.component';
@@ -27,19 +31,23 @@ import { ChatMessageComponent } from './chat-message.component';
   templateUrl: 'app/chat-window/chat-window.component.html',
   styleUrls: ['app/chat-window/chat-window.component.css']
 })
+// @CanActivate((next, prev) => {
+//     var injector: Injector = ReflectiveInjector.resolveAndCreate([AuthService, HTTP_PROVIDERS]);
+//     var authService = injector.get(AuthService);
+//     return authService.isAuth().map((data: any) => data.status).do((x:any) => console.log(x)).toPromise();
+// })
 export class ChatWindowComponent implements OnInit {
   messages: Observable<any>;
   currentThread: Thread;
   draftMessage: Message;
   currentUser: User;
 
-  test: Boolean = true;
-
   constructor(public messageService: MessageService,
               public threadService: ThreadService,
               public userService: UserService,
               public el: ElementRef,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private authHttp: AuthHttp) {
   }
 
   ngOnInit(): void {
@@ -61,6 +69,13 @@ export class ChatWindowComponent implements OnInit {
             this.scrollToBottom();
           });
         });
+
+    this.authHttp.get('http://localhost:3131/is-auth').map((res) => {
+            return res.json();
+        }).subscribe((data) => {
+          console.log(data);
+        });
+
   }
 
   onEnter(event: any): void {

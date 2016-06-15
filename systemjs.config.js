@@ -14,7 +14,7 @@
 
     //3rd libs
     'underscore':                 'node_modules/underscore',
-
+    'angular2-jwt':               'node_modules/angular2-jwt',
     // for barrels
     'shared':                     'app/shared'
   };
@@ -27,6 +27,7 @@
 
     //3rd libs
     'underscore':                 { main: 'underscore.js', defaultExtension: 'js'},
+    'angular2-jwt':                 { main: 'angular2-jwt.js', defaultExtension: 'js'},
 
     // for barrels
     'shared':                     { main: 'index.js',  defaultExtension: 'js' },

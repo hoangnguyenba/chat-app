@@ -1,17 +1,16 @@
 import { Directive, Attribute, ViewContainerRef, DynamicComponentLoader } from '@angular/core';
 import { Router, RouterOutlet, ComponentInstruction } from '@angular/router-deprecated';
 import { LoginComponent } from '../login/login.component';
-import { AuthService } from './auth.service';
 
 @Directive({
-  selector: 'router-outlet'
+  selector: 'auth-router-outlet'
 })
-export class LoggedInRouterOutlet extends RouterOutlet {
+export class AuthRouterOutlet extends RouterOutlet {
   publicRoutes: any;
   private parentRouter: Router;
 
   constructor(_viewContainerRef: ViewContainerRef, _loader: DynamicComponentLoader,
-              _parentRouter: Router, @Attribute('name') nameAttr: string, private authService: AuthService) {
+              _parentRouter: Router, @Attribute('name') nameAttr: string) {
     super(_viewContainerRef, _loader, _parentRouter, nameAttr);
 
     this.parentRouter = _parentRouter;
@@ -24,9 +23,9 @@ export class LoggedInRouterOutlet extends RouterOutlet {
 
   activate(instruction: ComponentInstruction) {
     let url = instruction.urlPath;
-    if (!this.publicRoutes[url]) {
+    if (!this.publicRoutes[url] && !localStorage.getItem('jwt')) {
       // todo: redirect to Login, may be there a better way?
-      return this.authService.isAuth().map(data => data.status).toPromise();
+      this.parentRouter.navigateByUrl('/login');
     }
     return super.activate(instruction);
   }

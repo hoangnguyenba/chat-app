@@ -20,12 +20,12 @@ export class LoginComponent {
     let body = JSON.stringify({ username, password });
     this.http.post('http://localhost:3131/login', body, { headers: contentHeaders })
       .map((res) => {
-        return res.json()
+        let body = res.json();  
+        return body || { };
       })
       .subscribe(
         data => {
-          console.log(data);
-          // localStorage.setItem('jwt', response.json().id_token);
+          localStorage.setItem('jwt', data.id_token);
           if(data.status == true)
             this.router.parent.navigateByUrl('/');
         },
