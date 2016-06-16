@@ -34,13 +34,15 @@ export class ThreadService {
         return threads;
       });
 
+    this.orderedThreads = this.threads
+      .map((threadGroups: { [key: string]: Thread }) => {
+        let threads: Thread[] = _.values(threadGroups);
+        return _.sortBy(threads, (t: Thread) => t.id);
+      });
+
     this.currentThreadMessages = this.currentThread
       .combineLatest(messageService.messages,
                      (currentThread: Thread, messages: Message[]) => {
-        console.log('Thread');
-        console.log(currentThread);
-        console.log('Message');
-        console.log(messages);
         if (currentThread && messages.length > 0) {
           return _.chain(messages)
             .filter((message: Message) =>

@@ -12,21 +12,19 @@ import {
   MessageService,
   ThreadService,
   UserService
-} from '../shared';
+} from '../../shared';
 import { Observable } from 'rxjs';
-import { User, Thread, Message } from '../shared';
+import { User, Thread, Message } from '../../shared';
 
-import { ChatThreadsComponent } from './chat-threads.component';
 import { ChatMessageComponent } from './chat-message.component';
 
 @Component({
   selector: 'chat-window',
   directives: [ChatMessageComponent,
-               ChatThreadsComponent,
                FORM_DIRECTIVES],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: 'app/chat-window/chat-window.component.html',
-  styleUrls: ['app/chat-window/chat-window.component.css']
+  templateUrl: 'app/chat-container/chat-window/chat-window.component.html',
+  styleUrls: ['app/chat-container/chat-window/chat-window.component.css']
 })
 export class ChatWindowComponent implements OnInit {
   messages: Observable<any>;

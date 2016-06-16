@@ -5,7 +5,7 @@ import {
 
 @Component({
   selector: 'chat-threads',
-  templateUrl: 'app/chat-window/chat-threads.component.html'
+  templateUrl: 'app/chat-container/chat-threads/chat-threads.component.html'
 })
 export class ChatThreadsComponent implements OnInit {
 

@@ -3,7 +3,7 @@ import { Http, Response, HTTP_PROVIDERS } from '@angular/http';
 import { RouteConfig } from '@angular/router-deprecated';
 import { Injector, ReflectiveInjector } from '@angular/core';
 
-import { ChatWindowComponent } from './chat-window/index';
+import { ChatContainerComponent } from './chat-container/chat-container.component';
 import { LoginComponent } from './login/login.component';
 
 import { AuthRouterOutlet } from './shared/auth-router-outlet.directive';
@@ -13,12 +13,12 @@ import { UserService, ThreadService, MessageService, Thread, Message, User } fro
 @Component({
     selector: 'chat-app',
     template: '<auth-router-outlet></auth-router-outlet>',
-    directives: [ChatWindowComponent, AuthRouterOutlet],
+    directives: [ChatContainerComponent, AuthRouterOutlet],
     providers: [ UserService, MessageService, ThreadService ]
 })
 @RouteConfig([
   { path: '/', redirectTo: ['/Chat'] },
-  { path: '/chat', component: ChatWindowComponent, as: 'Chat' },
+  { path: '/chat', component: ChatContainerComponent, as: 'Chat' },
   { path: '/login', component: LoginComponent, as: 'Login' }
 ])
 export class AppComponent implements OnInit{

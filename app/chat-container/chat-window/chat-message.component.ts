@@ -6,12 +6,12 @@ import {
 } from '@angular/core';
 import {FORM_DIRECTIVES} from '@angular/common';
 
-import {Message} from '../shared';
+import {Message} from '../../shared';
 
 @Component({
   inputs: ['message'],
   selector: 'chat-message',
-  templateUrl: 'app/chat-window/chat-message.component.html'
+  templateUrl: 'app/chat-container/chat-window/chat-message.component.html'
 })
 export class ChatMessageComponent implements OnInit {
   message: Message;
