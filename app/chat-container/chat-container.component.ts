@@ -43,7 +43,12 @@ export class ChatContainerComponent implements OnInit {
             {
                 var id_token = localStorage.getItem('id_token');
                 var decode_toke = this.jwtHelper.decodeToken(id_token);
-                this.userService.setCurrentUser(new User({id:decode_toke.id, name: decode_toke.name}));
+                this.userService.setCurrentUser(new User(
+                        {
+                            id:decode_toke.id, 
+                            name: decode_toke.name
+                        }
+                    ));
             }
         });
         sup.unsubscribe();
