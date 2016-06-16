@@ -3,7 +3,6 @@ import {
   OnInit,
   ElementRef,
   ChangeDetectionStrategy,
-  Injector, ReflectiveInjector
 } from '@angular/core';
 
 import {FORM_DIRECTIVES} from '@angular/common';
@@ -13,7 +12,7 @@ import {
   ThreadService,
   UserService
 } from '../../shared';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Rx';
 import { User, Thread, Message } from '../../shared';
 
 import { ChatMessageComponent } from './chat-message.component';
@@ -48,8 +47,8 @@ export class ChatWindowComponent implements OnInit {
         this.currentThread = thread;
       });
 
-    this.userService.getCurrentUser().subscribe((data) => {
-      this.currentUser = new User(data.user);
+    this.userService.currentUser.subscribe((user) => {
+      this.currentUser = new User(user);
     });
 
     this.messages

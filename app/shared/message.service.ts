@@ -9,6 +9,9 @@ import { User } from './user.model';
 import { Thread } from './thread.model';
 import { Message } from './message.model';
 
+import { ThreadService } from './thread.service';
+
+
 let initialMessages: Message[] = [];
 
 interface IMessagesOperation extends Function {
@@ -106,7 +109,23 @@ export class MessageService {
   }
 
   updateMessage(socket:any, data:any) {
-    var message: Message = new Message(data);
+
+    // this.threadService.threads.subscribe(thread => {
+    //   console.log(thread);
+    // });
+
+    var message: Message = new Message(
+      {
+        isRead: false, 
+        sentAt:data.created_at,
+        author: new User(data.author),
+        text: data.text,
+        thread: new Thread({id:"user1:user2", name: 'Messi'})
+      }
+    );
+    console.log('#####################');
+    console.log(data);
+    console.log(message);
     this.newMessages.next(message);
   }
 

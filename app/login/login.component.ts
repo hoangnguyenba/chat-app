@@ -3,7 +3,7 @@ import { Router, RouterLink } from '@angular/router-deprecated';
 import { CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
 import { Http, Headers } from '@angular/http';
 import { contentHeaders } from '../shared/headers';
-
+import { UserService, User } from '../shared';
 
 @Component({
   selector: 'login',
@@ -12,7 +12,7 @@ import { contentHeaders } from '../shared/headers';
   styleUrls: ['app/login/login.component.css']
 })
 export class LoginComponent {
-  constructor(public router: Router, public http: Http) {
+  constructor(public router: Router, public http: Http, private userService: UserService) {
   }
 
   login(event: Event, username: String, password: String) {
@@ -26,6 +26,7 @@ export class LoginComponent {
       .subscribe(
         data => {
           localStorage.setItem('id_token', data.id_token);
+          this.userService.setCurrentUser(new User(data.user));
           if(data.status == true)
             this.router.parent.navigateByUrl('/');
         },

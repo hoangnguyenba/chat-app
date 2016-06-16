@@ -21,33 +21,7 @@ import { UserService, ThreadService, MessageService, Thread, Message, User } fro
   { path: '/chat', component: ChatContainerComponent, as: 'Chat' },
   { path: '/login', component: LoginComponent, as: 'Login' }
 ])
-export class AppComponent implements OnInit{
+export class AppComponent {
 
-    constructor(private messageService: MessageService,
-                private userService: UserService,
-                private threadsService: ThreadService)
-    {
-    }
-
-    ngOnInit(): void {
-        this.messageService.messages.subscribe(() => ({}));
-
-        // set "Juliet" as the current user
-        // this.userService.setCurrentUser(me);
-
-        // create the initial messages
-        this.messageService.getMessages('user1:user2')
-          .subscribe((data) => {
-            var messages_server:Message[] = data.Items.map((item: any) => {
-                return new Message(item);
-            });
-            
-            this.messageService.updates.next((messages: Message[]) => {
-                return messages.concat(messages_server);
-            });
-        });
-
-
-        this.threadsService.setCurrentThread(new Thread("user1:user2"));
-    }
+    
 }

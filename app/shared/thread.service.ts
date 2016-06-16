@@ -23,7 +23,6 @@ export class ThreadService {
   constructor(public messageService: MessageService) {
 
     this.threads = messageService.messages
-      .do((messages) => console.log(messages))
       .map( (messages: Message[]) => {
         let threads: {[key: string]: Thread} = {};
         // Store the message's thread in our accumulator `threads`
@@ -33,6 +32,8 @@ export class ThreadService {
         });
         return threads;
       });
+      // .publishReplay(1)
+      // .refCount();
 
     this.orderedThreads = this.threads
       .map((threadGroups: { [key: string]: Thread }) => {

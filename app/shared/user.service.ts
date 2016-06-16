@@ -1,21 +1,17 @@
 import { Injectable } from '@angular/core';
-
+import {Subject, BehaviorSubject} from 'rxjs/Rx';
 import { User } from './user.model';
 
-import { AuthHttp } from 'angular2-jwt';
 
+/**
+ * UserService manages our current user
+ */
 @Injectable()
 export class UserService {
+  // `currentUser` contains the current user
+  currentUser: Subject<User> = new BehaviorSubject<User>(null);
 
-    constructor(private authHttp: AuthHttp) { }
-
-    getCurrentUser() {
-        // return new User("user1", "User One");
-
-        return this.authHttp.get('http://localhost:3131/user/me').map((res) => {
-            let body = res.json();
-            return body || { };
-            // return body.data || { };
-        }).do(x => console.log(x));
-    }
+  public setCurrentUser(newUser: User): void {
+    this.currentUser.next(newUser);
+  }
 }
