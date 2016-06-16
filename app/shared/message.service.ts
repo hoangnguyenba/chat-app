@@ -39,8 +39,8 @@ export class MessageService {
   private socket: any;
 
   constructor(private http: Http, private authHttp: AuthHttp) {
-    this.socket = new io(this.serverUrl);
 
+    this.socket = new io(this.serverUrl);
 
     this.messages = this.updates
       .do((x)=> console.log('updates1 :' + x))
@@ -101,17 +101,22 @@ export class MessageService {
         };
       })
       .subscribe(this.updates);
+
+    this.socket.on("chat_message", this.updateMessage.bind(this, this.socket));
   }
 
-  // an imperative function call to this action stream
-  addMessage(message: Message, is_sync: Boolean = true): void {
-
-    console.log(message);
-
+  updateMessage(socket:any, data:any) {
+    var message: Message = new Message(data);
     this.newMessages.next(message);
+  }
 
-    if(is_sync)
-      this.socket.emit('chat_message', message);
+
+  // an imperative function call to this action stream
+  addMessage(message: Message): void {
+
+    // this.newMessages.next(message);
+
+    this.socket.emit('chat_message', message);
   }
 
   getMessages(thread_id: String): Observable<any> {
