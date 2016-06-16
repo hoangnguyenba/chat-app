@@ -4,6 +4,8 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 
+import { JwtHelper } from 'angular2-jwt';
+
 import { ChatThreadsComponent } from './chat-threads/chat-threads.component';
 import { ChatWindowComponent } from './chat-window/chat-window.component';
 
@@ -22,7 +24,8 @@ export class ChatContainerComponent implements OnInit {
   constructor(
       private messageService: MessageService,
       private userService: UserService,
-      private threadsService: ThreadService
+      private threadsService: ThreadService,
+      private jwtHelper: JwtHelper
       )
     {
     }
@@ -32,6 +35,18 @@ export class ChatContainerComponent implements OnInit {
 
         // set "Juliet" as the current user
         // this.userService.setCurrentUser(me);
+
+        // if current use doesn't exist (because remmber jwt)
+        var sup = this.userService.currentUser.subscribe(user => {
+            // try to load current
+            if(user == null)
+            {
+                var id_token = localStorage.getItem('id_token');
+                var decode_toke = this.jwtHelper.decodeToken(id_token);
+                this.userService.setCurrentUser(new User({id:decode_toke.id, name: decode_toke.name}));
+            }
+        });
+        sup.unsubscribe();
 
         var threadMessi: Thread = new Thread(
             {
