@@ -53,13 +53,13 @@ export class ChatContainerComponent implements OnInit {
         });
         sup.unsubscribe();
 
+        // create the initial messages
         var threadMessi: Thread = new Thread(
             {
                 id: 'user1:user2',
                 name: "Messi"
             });
 
-        // create the initial messages
         this.messageService.getMessages('user1:user2')
           .subscribe((data) => {
             var messages_server:Message[] = data.Items.map((item: any) => {
@@ -70,6 +70,30 @@ export class ChatContainerComponent implements OnInit {
                         author: new User(item.author),
                         text: item.text,
                         thread: threadMessi
+                    });
+            });
+            
+            this.messageService.updates.next((messages: Message[]) => {
+                return messages.concat(messages_server);
+            });
+        });
+
+        var threadRooney: Thread = new Thread(
+            {
+                id: 'user1:user3',
+                name: "Rooney"
+            });
+
+        this.messageService.getMessages('user1:user3')
+          .subscribe((data) => {
+            var messages_server:Message[] = data.Items.map((item: any) => {
+                return new Message(
+                    {
+                        isRead: false, 
+                        sentAt:item.created_at,
+                        author: new User(item.author),
+                        text: item.text,
+                        thread: threadRooney
                     });
             });
             
