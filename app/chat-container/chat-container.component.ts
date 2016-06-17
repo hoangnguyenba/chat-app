@@ -36,6 +36,8 @@ export class ChatContainerComponent implements OnInit {
         // set "Juliet" as the current user
         // this.userService.setCurrentUser(me);
 
+        var currentUser: User;
+
         // if current use doesn't exist (because remmber jwt)
         var sup = this.userService.currentUser.subscribe(user => {
             // try to load current
@@ -43,67 +45,60 @@ export class ChatContainerComponent implements OnInit {
             {
                 var id_token = localStorage.getItem('id_token');
                 var decode_toke = this.jwtHelper.decodeToken(id_token);
-                this.userService.setCurrentUser(new User(
+                currentUser = new User(
                         {
                             id:decode_toke.id, 
                             name: decode_toke.name
                         }
-                    ));
+                    );
+                this.userService.setCurrentUser(currentUser);
+            }
+            else
+            {
+                currentUser = user;
             }
         });
         sup.unsubscribe();
 
         // create the initial messages
-        var threadMessi: Thread = new Thread(
-            {
-                id: 'user1:user2',
-                name: "Messi"
-            });
+        this.userService.getUserList().subscribe(data => {
+            data.Items.map((user:any) => {
+                var thread_name: string;
+                if(user.id < currentUser.id)
+                    thread_name = user.id + ':' + currentUser.id;
+                else
+                    thread_name = currentUser.id + ':' + user.id;
 
-        this.messageService.getMessages('user1:user2')
-          .subscribe((data) => {
-            var messages_server:Message[] = data.Items.map((item: any) => {
-                return new Message(
-                    {
-                        isRead: false, 
-                        sentAt:item.created_at,
-                        author: new User(item.author),
-                        text: item.text,
-                        thread: threadMessi
+                var thread: Thread = new Thread(
+                {
+                    id: thread_name,
+                    name: user.name
+                });
+
+
+                this.messageService.getMessages(thread_name)
+                    .subscribe((data) => {
+                        var messages_server:Message[] = data.Items.map((message: any) => {
+                            return new Message(
+                                {
+                                    isRead: false, 
+                                    sentAt:message.created_at,
+                                    author: new User(message.author),
+                                    text: message.text,
+                                    thread: thread
+                                });
+                        });
+                        
+                        this.messageService.updates.next((messages: Message[]) => {
+                            return messages.concat(messages_server);
+                        });
                     });
-            });
-            
-            this.messageService.updates.next((messages: Message[]) => {
-                return messages.concat(messages_server);
+
+                this.threadsService.setCurrentThread(thread);
+
             });
         });
 
-        var threadRooney: Thread = new Thread(
-            {
-                id: 'user1:user3',
-                name: "Rooney"
-            });
-
-        this.messageService.getMessages('user1:user3')
-          .subscribe((data) => {
-            var messages_server:Message[] = data.Items.map((item: any) => {
-                return new Message(
-                    {
-                        isRead: false, 
-                        sentAt:item.created_at,
-                        author: new User(item.author),
-                        text: item.text,
-                        thread: threadRooney
-                    });
-            });
-            
-            this.messageService.updates.next((messages: Message[]) => {
-                return messages.concat(messages_server);
-            });
-        });
-
-
-        this.threadsService.setCurrentThread(threadMessi);
     }
 
 }
