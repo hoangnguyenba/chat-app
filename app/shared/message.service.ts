@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Http, Response } from '@angular/http';
 
 import {Subject, Observable} from 'rxjs/Rx';
@@ -8,6 +8,8 @@ import { AuthHttp } from 'angular2-jwt';
 import { User } from './user.model';
 import { Thread } from './thread.model';
 import { Message } from './message.model';
+
+import { APP_CONFIG, AppConfig } from '../config';
 
 import { ThreadService } from './thread.service';
 
@@ -38,12 +40,13 @@ export class MessageService {
   create: Subject<Message> = new Subject<Message>();
   markThreadAsRead: Subject<any> = new Subject<any>();
 
-  private serverUrl:String = 'http://localhost:3131/';
   private socket: any;
 
-  constructor(private http: Http, private authHttp: AuthHttp) {
+  constructor(private http: Http, 
+              private authHttp: AuthHttp,
+              @Inject(APP_CONFIG) private config:AppConfig) {
 
-    this.socket = new io(this.serverUrl);
+    this.socket = new io(this.config.apiEndpoint);
 
     this.messages = this.updates
       .do((x)=> console.log('updates1 :' + x))
@@ -139,7 +142,7 @@ export class MessageService {
   }
 
   getMessages(thread_id: String): Observable<any> {
-      return this.authHttp.get(this.serverUrl + 'fetch?thread_id=' + thread_id)
+      return this.authHttp.get(this.config.apiEndpoint + 'fetch?thread_id=' + thread_id)
                     .map(this.extractData);
   }
 
