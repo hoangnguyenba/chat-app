@@ -1,4 +1,4 @@
 <li class="list-group-item" (click)="clicked($event)" [class.active]="selected">
-    <span class="badge">5</span>
+    <span class="badge">{{unreadMessagesCount}}</span>
     {{thread.name}}
 </li>
