@@ -6,11 +6,10 @@ import {
 
 import { JwtHelper } from 'angular2-jwt';
 
-import { ChatThreadsComponent } from './chat-threads/chat-threads.component';
-import { ChatWindowComponent } from './chat-window/chat-window.component';
+import { ChatThreadsComponent } from './chat-threads';
+import { ChatWindowComponent } from './chat-window';
 
-import { UserService, ThreadService, MessageService, Thread, Message, User } from '../shared';
-import { SocketService } from '../shared/socket.service';
+import { UserService, ThreadService, MessageService, Thread, Message, User, SocketService } from '../shared';
 
 @Component({
   selector: 'chat-container',

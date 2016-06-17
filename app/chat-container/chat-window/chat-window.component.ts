@@ -12,9 +12,9 @@ import {
   ThreadService,
   UserService
 } from '../../shared';
-import { SocketService } from '../../shared/socket.service';
+
 import { Observable } from 'rxjs/Rx';
-import { User, Thread, Message } from '../../shared';
+import { User, Thread, Message, SocketService } from '../../shared';
 
 import { ChatMessageComponent } from './chat-message.component';
 

@@ -15,8 +15,13 @@
     //3rd libs
     'underscore':                 'node_modules/underscore',
     'angular2-jwt':               'node_modules/angular2-jwt',
+
     // for barrels
-    'shared':                     'app/shared'
+    'shared':                     'app/shared',
+    'chat-container':             'app/chat-container',
+    'chat-threads':               'app/chat-container/chat-threads',
+    'chat-window':                'app/chat-container/chat-window',
+    'login':             'app/login'
   };
 
   // packages tells the System loader how to load when no filename and/or no extension
@@ -31,6 +36,10 @@
 
     // for barrels
     'shared':                     { main: 'index.js',  defaultExtension: 'js' },
+    'chat-container':                     { main: 'index.js',  defaultExtension: 'js' },
+    'chat-threads':                     { main: 'index.js',  defaultExtension: 'js' },
+    'chat-window':                     { main: 'index.js',  defaultExtension: 'js' },
+    'window':                     { main: 'index.js',  defaultExtension: 'js' },
   };
 
   var ngPackageNames = [

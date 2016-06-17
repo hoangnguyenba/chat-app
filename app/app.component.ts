@@ -6,8 +6,7 @@ import { Injector, ReflectiveInjector } from '@angular/core';
 import { ChatContainerComponent } from './chat-container/chat-container.component';
 import { LoginComponent } from './login/login.component';
 
-import { AuthRouterOutlet } from './shared/auth-router-outlet.directive';
-import { Thread, Message, User } from './shared';
+import { Thread, Message, User, AuthRouterOutlet } from './shared';
 
 
 @Component({
@@ -20,7 +19,5 @@ import { Thread, Message, User } from './shared';
   { path: '/chat', component: ChatContainerComponent, as: 'Chat' },
   { path: '/login', component: LoginComponent, as: 'Login' }
 ])
-export class AppComponent {
-
-    
+export class AppComponent {  
 }
