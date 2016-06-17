@@ -9,7 +9,7 @@ import { JwtHelper } from 'angular2-jwt';
 import { ChatThreadsComponent } from './chat-threads';
 import { ChatWindowComponent } from './chat-window';
 
-import { UserService, ThreadService, MessageService, Thread, Message, User, SocketService } from '../shared';
+import { UserService, ThreadService, MessageService, Thread, Message, User, SocketService, ChatUtilService } from '../shared';
 
 @Component({
   selector: 'chat-container',
@@ -26,7 +26,8 @@ export class ChatContainerComponent implements OnInit {
         private userService: UserService,
         private threadsService: ThreadService,
         private jwtHelper: JwtHelper,
-        private socketService: SocketService
+        private socketService: SocketService,
+        private chatUtilService: ChatUtilService
         )
         {
         }
@@ -82,14 +83,7 @@ export class ChatContainerComponent implements OnInit {
                 this.messageService.getMessages(thread_name)
                     .subscribe((data) => {
                         var messages_server:Message[] = data.Items.map((message: any) => {
-                            return new Message(
-                                {
-                                    isRead: false, 
-                                    sentAt:message.created_at,
-                                    author: new User(message.author),
-                                    text: message.text,
-                                    thread: thread
-                                });
+                            return this.chatUtilService.convertMessageFromServer(message, thread);
                         });
                         
                         // For threads don't have any messages yet

@@ -4,13 +4,11 @@ import { Http, HTTP_PROVIDERS } from '@angular/http';
 import { ROUTER_PROVIDERS } from '@angular/router-deprecated';
 import { AuthConfig, AuthHttp, AUTH_PROVIDERS, JwtHelper } from 'angular2-jwt';
 
-import { AuthService } from './shared/auth.service';
 import { AppComponent } from './app.component';
 
-import { SocketService } from './shared/socket.service';
-import { UserService, ThreadService, MessageService } from './shared';
+import { UserService, ThreadService, MessageService, ChatUtilService, SocketService, AuthService } from './shared';
 
-import { APP_CONFIG, CHAT_APP_CONFIG } from './config';
+import { APP_CONFIG, CHAT_APP_CONFIG, AppConfig } from './config';
 
 bootstrap(AppComponent, [   
                             HTTP_PROVIDERS,
@@ -19,10 +17,20 @@ bootstrap(AppComponent, [
                             ROUTER_PROVIDERS, 
                             { provide: APP_CONFIG, useValue: CHAT_APP_CONFIG },
                             AuthService,
-                            SocketService,
+                            ChatUtilService,
                             MessageService,
                             UserService,
-                            ThreadService
+                            ThreadService,
+                            {
+                                provide: SocketService,
+                                useFactory: (   config:AppConfig, 
+                                                messageService: MessageService, 
+                                                threadService: ThreadService,
+                                                chatUtilService: ChatUtilService) => {
+                                    return new SocketService(config, messageService, threadService, chatUtilService);
+                                },
+                                deps: [APP_CONFIG, MessageService, ThreadService]
+                            }
                             // provide(AuthHttp, { 
                             //     useFactory: (http) => {
                             //         return new AuthHttp(new AuthConfig({

@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { APP_CONFIG, AppConfig } from '../config';
 
-import { ThreadService, MessageService, Message, User, Thread } from '../shared';
+import { ThreadService, MessageService, ChatUtilService, Message, User, Thread } from '../shared';
 
 import * as _ from 'underscore';
 
@@ -18,7 +18,8 @@ export class SocketService {
 
     constructor(@Inject(APP_CONFIG) private config:AppConfig,
                 private messageService: MessageService,
-                private threadService: ThreadService
+                private threadService: ThreadService,
+                private chatUtilService: ChatUtilService
                 )
      { 
         this.socket = new io(this.config.apiEndpoint);
@@ -37,15 +38,8 @@ export class SocketService {
         var thread = _.find(this.threads, item => {
             return item.id == data.thread_id;
         })
-        var message: Message = new Message(
-            {
-                isRead: false, 
-                sentAt:data.created_at,
-                author: new User(data.author),
-                text: data.text,
-                thread: thread
-            }
-        );
+
+        var message = this.chatUtilService.convertMessageFromServer(data, thread);
         this.messageService.newMessages.next(message);
     }
 
