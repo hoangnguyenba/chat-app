@@ -49,7 +49,6 @@ export class MessageService {
     this.socket = new io(this.config.apiEndpoint);
 
     this.messages = this.updates
-      .do((x)=> console.log('updates1 :' + x))
       // watch the updates and accumulate operations on the messages
       .scan((messages: Message[],
              operation: IMessagesOperation) => {
@@ -77,7 +76,6 @@ export class MessageService {
     // entirely. The pros are that it is potentially clearer. The cons are that
     // the stream is no longer composable.
     this.create
-      .do((x)=> console.log('create :' + x))
       .map( function(message: Message): IMessagesOperation {
         return (messages: Message[]) => {
           return messages.concat(message);
@@ -87,7 +85,6 @@ export class MessageService {
       // .subscribe((x) => console.log(x));
 
     this.newMessages
-      .do((x)=> {console.log('newMessages :');console.log(x)})
       .subscribe(this.create);
 
     // similarly, `markThreadAsRead` takes a Thread and then puts an operation
@@ -126,9 +123,9 @@ export class MessageService {
         thread: new Thread({id:"user1:user2", name: 'Messi'})
       }
     );
-    console.log('#####################');
-    console.log(data);
-    console.log(message);
+    // console.log('#####################');
+    // console.log(data);
+    // console.log(message);
     this.newMessages.next(message);
   }
 

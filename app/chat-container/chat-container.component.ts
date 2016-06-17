@@ -21,14 +21,14 @@ import { UserService, ThreadService, MessageService, Thread, Message, User } fro
 })
 export class ChatContainerComponent implements OnInit {
 
-  constructor(
-      private messageService: MessageService,
-      private userService: UserService,
-      private threadsService: ThreadService,
-      private jwtHelper: JwtHelper
-      )
-    {
-    }
+    constructor(
+        private messageService: MessageService,
+        private userService: UserService,
+        private threadsService: ThreadService,
+        private jwtHelper: JwtHelper
+        )
+        {
+        }
 
     ngOnInit(): void {
         this.messageService.messages.subscribe(() => ({}));
@@ -47,7 +47,7 @@ export class ChatContainerComponent implements OnInit {
                 var decode_toke = this.jwtHelper.decodeToken(id_token);
                 currentUser = new User(
                         {
-                            id:decode_toke.id, 
+                            id: decode_toke.id, 
                             name: decode_toke.name
                         }
                     );
@@ -61,6 +61,7 @@ export class ChatContainerComponent implements OnInit {
         sup.unsubscribe();
 
         // create the initial messages
+        // Get list user from server
         this.userService.getUserList().subscribe(data => {
             data.Items.map((user:any) => {
                 var thread_name: string;
@@ -69,13 +70,14 @@ export class ChatContainerComponent implements OnInit {
                 else
                     thread_name = currentUser.id + ':' + user.id;
 
+                // With every user, create a new thread
                 var thread: Thread = new Thread(
-                {
-                    id: thread_name,
-                    name: user.name
-                });
+                    {
+                        id: thread_name,
+                        name: user.name
+                    });
 
-
+                // Get messages of logged in user with this user from server
                 this.messageService.getMessages(thread_name)
                     .subscribe((data) => {
                         var messages_server:Message[] = data.Items.map((message: any) => {
@@ -89,9 +91,19 @@ export class ChatContainerComponent implements OnInit {
                                 });
                         });
                         
+                        // For threads don't have any messages yet
+                        // create an empty message ( for add thread )
+                        if(messages_server.length == 0)
+                        {
+                            messages_server = [new Message({
+                                    thread: thread
+                                })];
+                        }
+
+                        // Add messages into message service
                         this.messageService.updates.next((messages: Message[]) => {
-                            return messages.concat(messages_server);
-                        });
+                                return messages.concat(messages_server);
+                            });
                     });
 
                 this.threadsService.setCurrentThread(thread);
