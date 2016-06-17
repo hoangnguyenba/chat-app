@@ -12,6 +12,7 @@ import {
   ThreadService,
   UserService
 } from '../../shared';
+import { SocketService } from '../../shared/socket.service';
 import { Observable } from 'rxjs/Rx';
 import { User, Thread, Message } from '../../shared';
 
@@ -31,10 +32,11 @@ export class ChatWindowComponent implements OnInit {
   draftMessage: Message;
   currentUser: User;
 
-  constructor(public messageService: MessageService,
-              public threadService: ThreadService,
-              public userService: UserService,
-              public el: ElementRef) {
+  constructor(private messageService: MessageService,
+              private threadService: ThreadService,
+              private userService: UserService,
+              private socketService: SocketService,
+              private el: ElementRef) {
   }
 
   ngOnInit(): void {
@@ -70,7 +72,8 @@ export class ChatWindowComponent implements OnInit {
     m.author = this.currentUser;
     m.thread = this.currentThread;
     m.isRead = true;
-    this.messageService.addMessage(m);
+    // this.messageService.addMessage(m);
+    this.socketService.addMessage(m);
     this.draftMessage = new Message();
   }
 

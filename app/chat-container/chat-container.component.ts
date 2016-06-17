@@ -10,6 +10,7 @@ import { ChatThreadsComponent } from './chat-threads/chat-threads.component';
 import { ChatWindowComponent } from './chat-window/chat-window.component';
 
 import { UserService, ThreadService, MessageService, Thread, Message, User } from '../shared';
+import { SocketService } from '../shared/socket.service';
 
 @Component({
   selector: 'chat-container',
@@ -25,7 +26,8 @@ export class ChatContainerComponent implements OnInit {
         private messageService: MessageService,
         private userService: UserService,
         private threadsService: ThreadService,
-        private jwtHelper: JwtHelper
+        private jwtHelper: JwtHelper,
+        private socketService: SocketService
         )
         {
         }
@@ -111,6 +113,8 @@ export class ChatContainerComponent implements OnInit {
             });
         });
 
+
+        this.socketService.start();
     }
 
 }

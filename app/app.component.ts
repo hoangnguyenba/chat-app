@@ -7,14 +7,13 @@ import { ChatContainerComponent } from './chat-container/chat-container.componen
 import { LoginComponent } from './login/login.component';
 
 import { AuthRouterOutlet } from './shared/auth-router-outlet.directive';
-import { UserService, ThreadService, MessageService, Thread, Message, User } from './shared';
+import { Thread, Message, User } from './shared';
 
 
 @Component({
     selector: 'chat-app',
     template: '<auth-router-outlet></auth-router-outlet>',
-    directives: [ChatContainerComponent, AuthRouterOutlet],
-    providers: [ UserService, MessageService, ThreadService ]
+    directives: [ChatContainerComponent, AuthRouterOutlet]
 })
 @RouteConfig([
   { path: '/', redirectTo: ['/Chat'] },

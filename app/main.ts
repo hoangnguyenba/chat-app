@@ -7,6 +7,9 @@ import { AuthConfig, AuthHttp, AUTH_PROVIDERS, JwtHelper } from 'angular2-jwt';
 import { AuthService } from './shared/auth.service';
 import { AppComponent } from './app.component';
 
+import { SocketService } from './shared/socket.service';
+import { UserService, ThreadService, MessageService } from './shared';
+
 import { APP_CONFIG, CHAT_APP_CONFIG } from './config';
 
 bootstrap(AppComponent, [   
@@ -15,7 +18,11 @@ bootstrap(AppComponent, [
                             JwtHelper,
                             ROUTER_PROVIDERS, 
                             { provide: APP_CONFIG, useValue: CHAT_APP_CONFIG },
-                            AuthService
+                            AuthService,
+                            SocketService,
+                            MessageService,
+                            UserService,
+                            ThreadService
                             // provide(AuthHttp, { 
                             //     useFactory: (http) => {
                             //         return new AuthHttp(new AuthConfig({

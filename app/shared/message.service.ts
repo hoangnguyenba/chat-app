@@ -11,16 +11,11 @@ import { Message } from './message.model';
 
 import { APP_CONFIG, AppConfig } from '../config';
 
-import { ThreadService } from './thread.service';
-
-
 let initialMessages: Message[] = [];
 
 interface IMessagesOperation extends Function {
   (messages: Message[]): Message[];
 }
-
-declare var io: any;
 
 @Injectable()
 export class MessageService {
@@ -45,8 +40,6 @@ export class MessageService {
   constructor(private http: Http, 
               private authHttp: AuthHttp,
               @Inject(APP_CONFIG) private config:AppConfig) {
-
-    this.socket = new io(this.config.apiEndpoint);
 
     this.messages = this.updates
       // watch the updates and accumulate operations on the messages
@@ -104,38 +97,11 @@ export class MessageService {
         };
       })
       .subscribe(this.updates);
-
-    this.socket.on("chat_message", this.updateMessage.bind(this, this.socket));
   }
-
-  updateMessage(socket:any, data:any) {
-
-    // this.threadService.threads.subscribe(thread => {
-    //   console.log(thread);
-    // });
-
-    var message: Message = new Message(
-      {
-        isRead: false, 
-        sentAt:data.created_at,
-        author: new User(data.author),
-        text: data.text,
-        thread: new Thread({id:"user1:user2", name: 'Messi'})
-      }
-    );
-    // console.log('#####################');
-    // console.log(data);
-    // console.log(message);
-    this.newMessages.next(message);
-  }
-
 
   // an imperative function call to this action stream
   addMessage(message: Message): void {
-
     // this.newMessages.next(message);
-
-    this.socket.emit('chat_message', message);
   }
 
   getMessages(thread_id: String): Observable<any> {
