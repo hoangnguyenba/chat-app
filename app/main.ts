@@ -29,7 +29,7 @@ bootstrap(AppComponent, [
                                                 chatUtilService: ChatUtilService) => {
                                     return new SocketService(config, messageService, threadService, chatUtilService);
                                 },
-                                deps: [APP_CONFIG, MessageService, ThreadService]
+                                deps: [APP_CONFIG, MessageService, ThreadService, ChatUtilService]
                             }
                             // provide(AuthHttp, { 
                             //     useFactory: (http) => {
