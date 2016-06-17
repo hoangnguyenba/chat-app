@@ -37,12 +37,7 @@ export class ThreadService {
 
     this.orderedThreads = this.threads
       .map((threadGroups: { [key: string]: Thread }) => {
-
-        // console.log('#########1#######');
-
         let threads: Thread[] = _.values(threadGroups);
-        // console.log(threadGroups);
-        // console.log(threads);
         return _.sortBy(threads, (t: Thread) => t.id);
       });
 

@@ -3,10 +3,16 @@ import { APP_CONFIG, AppConfig } from '../config';
 
 import { ThreadService, MessageService, Message, User, Thread } from '../shared';
 
+import * as _ from 'underscore';
+
 declare var io: any;
 
 @Injectable()
 export class SocketService {
+
+    // store list of threads, every time we get a message from server
+    // find the correct Thread in this array
+    private threads: Thread[];
 
     private socket: any;
 
@@ -16,6 +22,10 @@ export class SocketService {
                 )
      { 
         this.socket = new io(this.config.apiEndpoint);
+
+        this.threadService.threads.subscribe(threadGroups => {
+            this.threads = _.values(threadGroups);
+        });
      }
 
     start(): void {
@@ -23,22 +33,19 @@ export class SocketService {
     }
 
     private updateMessage(socket: any, data: any): void {
-        // this.threadService.threads.subscribe(thread => {
-        //   console.log(thread);
-        // });
 
+        var thread = _.find(this.threads, item => {
+            return item.id == data.thread_id;
+        })
         var message: Message = new Message(
             {
                 isRead: false, 
                 sentAt:data.created_at,
                 author: new User(data.author),
                 text: data.text,
-                thread: new Thread({id:"user1:user2", name: 'Messi'})
+                thread: thread
             }
         );
-        // console.log('#####################');
-        // console.log(data);
-        // console.log(message);
         this.messageService.newMessages.next(message);
     }
 
