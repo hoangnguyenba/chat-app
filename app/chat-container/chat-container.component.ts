@@ -65,6 +65,7 @@ export class ChatContainerComponent implements OnInit {
         // create the initial messages
         // Get list user from server
         this.userService.getUserList().subscribe(data => {
+            console.log(data);
             data.Items.map((user:any) => {
                 var thread_name: string;
                 if(user.id < currentUser.id)
@@ -91,6 +92,7 @@ export class ChatContainerComponent implements OnInit {
                         if(messages_server.length == 0)
                         {
                             messages_server = [new Message({
+                                    isRead: true,
                                     thread: thread
                                 })];
                         }
