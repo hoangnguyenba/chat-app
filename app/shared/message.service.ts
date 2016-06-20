@@ -105,7 +105,7 @@ export class MessageService {
   }
 
   getMessages(thread_id: String): Observable<any> {
-      return this.authHttp.get(this.config.apiEndpoint + 'fetch?thread_id=' + thread_id)
+      return this.authHttp.get(this.config.apiEndpoint + 'messages/' + thread_id)
                     .map(this.extractData);
   }
 

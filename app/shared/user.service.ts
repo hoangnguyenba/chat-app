@@ -23,7 +23,7 @@ export class UserService {
   }
 
   public getUserList(): Observable<any> {
-    return this.http.get( this.config.apiEndpoint + 'user/get-list').map(res => {
+    return this.http.get( this.config.apiEndpoint + 'users').map(res => {
       return res.json();
     });
   }
