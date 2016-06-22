@@ -84,7 +84,7 @@ export class ChatContainerComponent implements OnInit {
                 this.messageService.getMessages(thread_name)
                     .subscribe((data) => {
                         var messages_server:Message[] = data.Items.map((message: any) => {
-                            return this.chatUtilService.convertMessageFromServer(message, thread);
+                            return this.chatUtilService.convertMessageFromServer(message, thread, currentUser);
                         });
                         
                         // For threads don't have any messages yet

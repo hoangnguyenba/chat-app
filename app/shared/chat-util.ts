@@ -8,10 +8,10 @@ export class ChatUtilService {
 
     constructor() { }
 
-    convertMessageFromServer(message:any, thread: Thread) : Message {
+    convertMessageFromServer(message:any, thread: Thread, user: User) : Message {
         return new Message(
                             {
-                                isRead: false, 
+                                isRead: _.include(message.is_read, user.id), 
                                 sentAt:message.created_at,
                                 author: new User(message.author),
                                 text: message.text,

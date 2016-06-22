@@ -45,7 +45,7 @@ export class SocketService {
             return item.id == data.thread_id;
         });
 
-        var message = this.chatUtilService.convertMessageFromServer(data, thread);
+        var message = this.chatUtilService.convertMessageFromServer(data, thread, this.currentUser);
         this.messageService.newMessages.next(message);
     }
 
@@ -56,7 +56,6 @@ export class SocketService {
 
     // mark thread as read
     markThreadAsRead(thread: Thread): void {
-        console.log('sending to serverrrrrrrrrrrrrrrrr');
         this.socket.emit('mark_thread_as_read', thread, this.currentUser);
     }
 }
