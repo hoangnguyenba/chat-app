@@ -45,7 +45,9 @@ export class ChatThreadComponent implements OnInit {
 
     clicked(event: any): void {
         // Ask server to save: I've read this thread
-        this.socketService.markThreadAsRead(this.thread);
+        if(this.unreadMessagesCount > 0)
+            this.socketService.markThreadAsRead(this.thread);
+            
         this.threadService.setCurrentThread(this.thread);
         event.preventDefault();
     }
