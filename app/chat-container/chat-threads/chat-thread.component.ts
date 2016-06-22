@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Thread, ThreadService, MessageService, Message } from '../../shared';
+import { Thread, ThreadService, MessageService, SocketService, Message } from '../../shared';
 
 @Component({
     selector: 'chat-thread',
@@ -13,6 +13,7 @@ export class ChatThreadComponent implements OnInit {
     unreadMessagesCount: number;
 
     constructor(private threadService: ThreadService,
+                private socketService: SocketService,
                 private messageService: MessageService) {
     }
 
@@ -43,6 +44,8 @@ export class ChatThreadComponent implements OnInit {
     }
 
     clicked(event: any): void {
+        // Ask server to save: I've read this thread
+        this.socketService.markThreadAsRead(this.thread);
         this.threadService.setCurrentThread(this.thread);
         event.preventDefault();
     }

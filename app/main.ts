@@ -26,10 +26,15 @@ bootstrap(AppComponent, [
                                 useFactory: (   config:AppConfig, 
                                                 messageService: MessageService, 
                                                 threadService: ThreadService,
-                                                chatUtilService: ChatUtilService) => {
-                                    return new SocketService(config, messageService, threadService, chatUtilService);
+                                                chatUtilService: ChatUtilService,
+                                                userService: UserService) => {
+                                    return new SocketService(   config, 
+                                                                messageService, 
+                                                                threadService, 
+                                                                chatUtilService, 
+                                                                userService);
                                 },
-                                deps: [APP_CONFIG, MessageService, ThreadService, ChatUtilService]
+                                deps: [APP_CONFIG, MessageService, ThreadService, ChatUtilService, UserService]
                             }
                             // provide(AuthHttp, { 
                             //     useFactory: (http) => {

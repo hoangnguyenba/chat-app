@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { APP_CONFIG, AppConfig } from '../config';
 
-import { ThreadService, MessageService, ChatUtilService, Message, User, Thread } from '../shared';
+import { ThreadService, MessageService, UserService, ChatUtilService, Message, User, Thread } from '../shared';
 
 import * as _ from 'underscore';
 
@@ -13,19 +13,25 @@ export class SocketService {
     // store list of threads, every time we get a message from server
     // find the correct Thread in this array
     private threads: Thread[];
+    private currentUser: User;
 
     private socket: any;
 
     constructor(@Inject(APP_CONFIG) private config:AppConfig,
                 private messageService: MessageService,
                 private threadService: ThreadService,
-                private chatUtilService: ChatUtilService
+                private chatUtilService: ChatUtilService,
+                private userService: UserService
                 )
      { 
         this.socket = new io(this.config.apiEndpoint);
 
         this.threadService.threads.subscribe(threadGroups => {
             this.threads = _.values(threadGroups);
+        });
+
+        this.userService.currentUser.subscribe((user) => {
+            this.currentUser = new User(user);
         });
      }
 
@@ -37,7 +43,7 @@ export class SocketService {
 
         var thread = _.find(this.threads, item => {
             return item.id == data.thread_id;
-        })
+        });
 
         var message = this.chatUtilService.convertMessageFromServer(data, thread);
         this.messageService.newMessages.next(message);
@@ -48,4 +54,9 @@ export class SocketService {
         this.socket.emit('chat_message', message);
     }
 
+    // mark thread as read
+    markThreadAsRead(thread: Thread): void {
+        console.log('sending to serverrrrrrrrrrrrrrrrr');
+        this.socket.emit('mark_thread_as_read', thread, this.currentUser);
+    }
 }
