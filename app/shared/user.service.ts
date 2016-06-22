@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
+import { AuthHttp } from 'angular2-jwt';
 
 import { Subject, BehaviorSubject, Observable } from 'rxjs/Rx';
 
@@ -15,7 +16,7 @@ export class UserService {
   // `currentUser` contains the current user
   currentUser: Subject<User> = new BehaviorSubject<User>(null);
 
-  constructor (private http: Http, @Inject(APP_CONFIG) private config:AppConfig) {
+  constructor (private authHttp: AuthHttp, @Inject(APP_CONFIG) private config:AppConfig) {
   }
 
   public setCurrentUser(newUser: User): void {
@@ -23,7 +24,7 @@ export class UserService {
   }
 
   public getUserList(): Observable<any> {
-    return this.http.get( this.config.apiEndpoint + 'users').map(res => {
+    return this.authHttp.get( this.config.apiEndpoint + 'users').map(res => {
       return res.json();
     });
   }
