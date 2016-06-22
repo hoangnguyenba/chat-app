@@ -35,8 +35,6 @@ export class MessageService {
   create: Subject<Message> = new Subject<Message>();
   markThreadAsRead: Subject<any> = new Subject<any>();
 
-  private socket: any;
-
   constructor(private http: Http, 
               private authHttp: AuthHttp,
               @Inject(APP_CONFIG) private config:AppConfig) {
