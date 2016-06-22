@@ -27,7 +27,14 @@ export class SocketService {
         this.socket = new io(this.config.apiEndpoint);
 
         this.threadService.threads.subscribe(threadGroups => {
-            this.threads = _.values(threadGroups);
+            var newThreads = _.values(threadGroups);
+            newThreads.forEach(thread => {
+                // if this thread is not exist in current threads array
+                if(!_.contains(this.threads, thread)){
+                    this.socket.on(thread.id, this.updateMessage.bind(this, this.socket));
+                }
+            });
+            this.threads = newThreads;
         });
 
         this.userService.currentUser.subscribe((user) => {
@@ -36,7 +43,6 @@ export class SocketService {
      }
 
     start(): void {
-        this.socket.on("chat_message", this.updateMessage.bind(this, this.socket));
     }
 
     private updateMessage(socket: any, data: any): void {
