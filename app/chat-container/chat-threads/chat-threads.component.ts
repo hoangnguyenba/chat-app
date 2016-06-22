@@ -1,12 +1,13 @@
 import {
   Component,
-  OnInit
+  OnInit,
+  Inject
 } from '@angular/core';
 
 import { Observable } from 'rxjs/Rx';
 
+import { APP_CONFIG, AppConfig } from '../../config';
 import { ThreadService, MessageService, Thread, Message } from '../../shared';
-
 import { ChatThreadComponent } from './chat-thread.component';
 
 @Component({
@@ -21,7 +22,8 @@ export class ChatThreadsComponent implements OnInit {
   threads: Observable<any>;
 
   constructor(private threadService: ThreadService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              @Inject(APP_CONFIG) private config:AppConfig) {
     this.threads = threadService.orderedThreads;
   }
 
@@ -46,6 +48,12 @@ export class ChatThreadsComponent implements OnInit {
               return sum;
             },
             0);
+
+            // Update title of app
+            if(this.unreadMessagesCount > 0)
+              document.title = "(" + this.unreadMessagesCount + ") " + this.config.title;
+            else
+              document.title = this.config.title;
       });
   }
 
