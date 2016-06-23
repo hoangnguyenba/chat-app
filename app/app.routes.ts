@@ -1,13 +1,19 @@
 import { provideRouter, RouterConfig } from '@angular/router';
 
 import { ChatContainerComponent } from './chat-container/chat-container.component';
-import { LoginComponent } from './login/login.component';
+import { LoginRoutes, AUTH_PROVIDERS } from './login/login.routes';
+import { AuthGuard } from './auth.guard';
 
 export const routes: RouterConfig = [
-  { path: '', component: ChatContainerComponent},
-  { path: 'login', component: LoginComponent}
+    { 
+        path: '', 
+        component: ChatContainerComponent,
+        canActivate: [AuthGuard]
+    },
+  ...LoginRoutes
 ];
 
 export const APP_ROUTER_PROVIDERS = [
-  provideRouter(routes)
+  provideRouter(routes),
+  AUTH_PROVIDERS
 ];

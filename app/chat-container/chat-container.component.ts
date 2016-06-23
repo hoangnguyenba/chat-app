@@ -110,7 +110,6 @@ export class ChatContainerComponent implements OnInit {
 
         // Get list thread from server
         this.threadsService.getThreadList().subscribe(data => {
-            console.log(data);
             data.forEach((threadServer:any) => {
                 var thread_name: string = threadServer.thread_id;
                 // var thread: Thread = new Thread(threadServer);

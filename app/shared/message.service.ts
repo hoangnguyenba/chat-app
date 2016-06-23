@@ -73,7 +73,6 @@ export class MessageService {
         };
       })
       .subscribe(this.updates);
-      // .subscribe((x) => console.log(x));
 
     this.newMessages
       .subscribe(this.create);

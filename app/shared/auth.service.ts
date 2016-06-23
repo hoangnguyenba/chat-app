@@ -8,9 +8,12 @@ import { AuthHttp } from 'angular2-jwt';
 import { APP_CONFIG, AppConfig } from '../config';
 import { contentHeaders } from './headers';
 import { User, UserService } from './index';
+import { tokenNotExpired } from 'angular2-jwt';
 
 @Injectable()
 export class AuthService {
+
+    isLoggedIn = false;
 
     constructor(private http: Http, 
                 private authHttp: AuthHttp,
@@ -18,12 +21,17 @@ export class AuthService {
                 private userService: UserService,
                 @Inject(APP_CONFIG) private config:AppConfig) { }
 
-    isAuth() {
-        return this.authHttp.get( this.config.apiEndpoint + 'is-auth').map((res) => {
-            let body = res.json();
-            // return body || { };
-            return body.data || { };
-        });
+    isAuth(): Boolean {
+
+        if(tokenNotExpired())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
     }
 
     login(username: String, password: String) {
@@ -38,7 +46,7 @@ export class AuthService {
                 localStorage.setItem('id_token', data.id_token);
                 this.userService.setCurrentUser(new User(data.user));
                 if(data.status == true)
-                    this.router.navigateByUrl('/');
+                    this.router.navigate(['/']);
             },
             error => {
                 alert(error.text());
