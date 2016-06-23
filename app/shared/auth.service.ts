@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { Router } from '@angular/router-deprecated';
+import { Router } from '@angular/router';
 
 import { AuthHttp } from 'angular2-jwt';
 

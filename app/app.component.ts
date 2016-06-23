@@ -1,23 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import { Http, Response, HTTP_PROVIDERS } from '@angular/http';
-import { RouteConfig } from '@angular/router-deprecated';
 import { Injector, ReflectiveInjector } from '@angular/core';
 
 import { ChatContainerComponent } from './chat-container/chat-container.component';
 import { LoginComponent } from './login/login.component';
 
-import { Thread, Message, User, AuthRouterOutlet } from './shared';
-
+import { Thread, Message, User } from './shared';
+import { ROUTER_DIRECTIVES }  from '@angular/router';
 
 @Component({
     selector: 'chat-app',
-    template: '<auth-router-outlet></auth-router-outlet>',
-    directives: [ChatContainerComponent, AuthRouterOutlet]
+    template: '<router-outlet></router-outlet>',
+    directives: [ChatContainerComponent, ROUTER_DIRECTIVES]
 })
-@RouteConfig([
-  { path: '/', redirectTo: ['/Chat'] },
-  { path: '/chat', component: ChatContainerComponent, as: 'Chat' },
-  { path: '/login', component: LoginComponent, as: 'Login' }
-])
 export class AppComponent {  
 }
