@@ -65,8 +65,7 @@ export class ChatContainerComponent implements OnInit {
         // create the initial messages
         // Get list user from server
         this.userService.getUserList().subscribe(data => {
-            console.log(data);
-            data.Items.map((user:any) => {
+            data.Items.forEach((user:any) => {
                 var thread_name: string;
                 if(user.id < currentUser.id)
                     thread_name = user.id + ':' + currentUser.id;
@@ -108,6 +107,46 @@ export class ChatContainerComponent implements OnInit {
             });
         });
 
+
+        // Get list thread from server
+        this.threadsService.getThreadList().subscribe(data => {
+            console.log(data);
+            data.forEach((threadServer:any) => {
+                var thread_name: string = threadServer.thread_id;
+                // var thread: Thread = new Thread(threadServer);
+                var thread: Thread = new Thread(
+                {
+                    id: thread_name,
+                    name: threadServer.name
+                });
+
+                // Get messages of logged in user with this user from server
+                this.messageService.getMessages(thread_name)
+                    .subscribe((data) => {
+                        var messages_server:Message[] = data.Items.map((message: any) => {
+                            return this.chatUtilService.convertMessageFromServer(message, thread, currentUser);
+                        });
+                        
+                        // For threads don't have any messages yet
+                        // create an empty message ( for add thread )
+                        if(messages_server.length == 0)
+                        {
+                            messages_server = [new Message({
+                                    isRead: true,
+                                    thread: thread
+                                })];
+                        }
+
+                        // Add messages into message service
+                        this.messageService.updates.next((messages: Message[]) => {
+                                return messages.concat(messages_server);
+                            });
+                    });
+
+                this.threadsService.setCurrentThread(thread);
+
+            });
+        });
 
         this.socketService.start();
     }

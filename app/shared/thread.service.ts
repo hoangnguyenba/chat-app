@@ -1,5 +1,7 @@
-import {Injectable, bind} from '@angular/core';
+import {Injectable, bind, Inject} from '@angular/core';
 import {Subject, BehaviorSubject, Observable} from 'rxjs/Rx';
+import { AuthHttp } from 'angular2-jwt';
+import { APP_CONFIG, AppConfig } from '../config';
 import {Thread, Message, MessageService} from '../shared';
 import * as _ from 'underscore';
 
@@ -20,7 +22,9 @@ export class ThreadService {
   // selected thread
   currentThreadMessages: Observable<Message[]>;
 
-  constructor(public messageService: MessageService) {
+  constructor(public messageService: MessageService, 
+              private authHttp: AuthHttp,
+              @Inject(APP_CONFIG) private config:AppConfig) {
 
     this.threads = messageService.messages
       .map( (messages: Message[]) => {
@@ -62,6 +66,12 @@ export class ThreadService {
 
   setCurrentThread(newThread: Thread): void {
     this.currentThread.next(newThread);
+  }
+
+  public getThreadList(): Observable<any> {
+    return this.authHttp.get( this.config.apiEndpoint + 'threads').map(res => {
+      return res.json().Responses.Thread;
+    });
   }
 
 }
