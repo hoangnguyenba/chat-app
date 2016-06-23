@@ -21,21 +21,22 @@ bootstrap(AppComponent, [
                             MessageService,
                             UserService,
                             ThreadService,
-                            {
-                                provide: SocketService,
-                                useFactory: (   config:AppConfig, 
-                                                messageService: MessageService, 
-                                                threadService: ThreadService,
-                                                chatUtilService: ChatUtilService,
-                                                userService: UserService) => {
-                                    return new SocketService(   config, 
-                                                                messageService, 
-                                                                threadService, 
-                                                                chatUtilService, 
-                                                                userService);
-                                },
-                                deps: [APP_CONFIG, MessageService, ThreadService, ChatUtilService, UserService]
-                            }
+                            SocketService
+                            // {
+                            //     provide: SocketService,
+                            //     useFactory: (   config:AppConfig, 
+                            //                     messageService: MessageService, 
+                            //                     threadService: ThreadService,
+                            //                     chatUtilService: ChatUtilService,
+                            //                     userService: UserService) => {
+                            //         return new SocketService(   config, 
+                            //                                     messageService, 
+                            //                                     threadService, 
+                            //                                     chatUtilService, 
+                            //                                     userService);
+                            //     },
+                            //     deps: [APP_CONFIG, MessageService, ThreadService, ChatUtilService, UserService]
+                            // }
                             // provide(AuthHttp, { 
                             //     useFactory: (http) => {
                             //         return new AuthHttp(new AuthConfig({
