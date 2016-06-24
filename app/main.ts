@@ -10,6 +10,8 @@ import { UserService, ThreadService, MessageService, ChatUtilService, SocketServ
 
 import { APP_CONFIG, CHAT_APP_CONFIG, AppConfig } from './config';
 
+import { ToastsManager } from 'ng2-toastr';
+
 bootstrap(AppComponent, [   
                             HTTP_PROVIDERS,
                             AUTH_PROVIDERS,
@@ -21,7 +23,8 @@ bootstrap(AppComponent, [
                             MessageService,
                             UserService,
                             ThreadService,
-                            SocketService
+                            SocketService,
+                            ToastsManager
                             // {
                             //     provide: SocketService,
                             //     useFactory: (   config:AppConfig, 
