@@ -15,13 +15,14 @@
     //3rd libs
     'underscore':                 'node_modules/underscore',
     'angular2-jwt':               'node_modules/angular2-jwt',
+    'ng2-toastr':                 'node_modules/ng2-toastr',
 
     // for barrels
     'shared':                     'app/shared',
     'chat-container':             'app/chat-container',
     'chat-threads':               'app/chat-container/chat-threads',
     'chat-window':                'app/chat-container/chat-window',
-    'login':             'app/login'
+    'login':                      'app/login'
   };
 
   // packages tells the System loader how to load when no filename and/or no extension
@@ -29,10 +30,12 @@
     'app':                        { main: 'main.js',  defaultExtension: 'js' },
     'rxjs':                       { defaultExtension: 'js' },
     'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
+    
 
     //3rd libs
     'underscore':                 { main: 'underscore.js', defaultExtension: 'js'},
     'angular2-jwt':                 { main: 'angular2-jwt.js', defaultExtension: 'js'},
+    'ng2-toastr':              { main: 'ng2-toastr.js', defaultExtension: 'js' },
 
     // for barrels
     'shared':                     { main: 'index.js',  defaultExtension: 'js' },
@@ -74,6 +77,7 @@
   // No umd for router yet
   packages['@angular/router'] = { main: 'index.js', defaultExtension: 'js' };
 
+  console.log(packages);
   var config = {
     map: map,
     packages: packages

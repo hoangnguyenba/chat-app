@@ -5,6 +5,7 @@ import {
 } from '@angular/core';
 
 import { JwtHelper } from 'angular2-jwt';
+import { ToastsManager } from 'ng2-toastr';
 
 import { ChatThreadsComponent } from './chat-threads';
 import { ChatWindowComponent } from './chat-window';
@@ -27,7 +28,8 @@ export class ChatContainerComponent implements OnInit {
         private threadsService: ThreadService,
         private jwtHelper: JwtHelper,
         private socketService: SocketService,
-        private chatUtilService: ChatUtilService
+        private chatUtilService: ChatUtilService,
+        public toastr: ToastsManager
         )
         {
         }
@@ -146,6 +148,8 @@ export class ChatContainerComponent implements OnInit {
 
             });
         });
+
+        this.toastr.success('Welcome back ' + currentUser.name);
 
         this.socketService.start();
     }
