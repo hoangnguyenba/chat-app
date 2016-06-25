@@ -16,6 +16,7 @@
     'underscore':                 'node_modules/underscore',
     'angular2-jwt':               'node_modules/angular2-jwt',
     'ng2-toastr':                 'node_modules/ng2-toastr',
+    'ng2-notifications':          'node_modules/ng2-notifications',
 
     // for barrels
     'shared':                     'app/shared',
@@ -36,6 +37,7 @@
     'underscore':                 { main: 'underscore.js', defaultExtension: 'js'},
     'angular2-jwt':                 { main: 'angular2-jwt.js', defaultExtension: 'js'},
     'ng2-toastr':              { main: 'ng2-toastr.js', defaultExtension: 'js' },
+    'ng2-notifications':              { main: 'ng2-notifications.js', defaultExtension: 'js' },
 
     // for barrels
     'shared':                     { main: 'index.js',  defaultExtension: 'js' },

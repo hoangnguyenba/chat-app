@@ -6,6 +6,7 @@ import {
 
 import { JwtHelper } from 'angular2-jwt';
 import { ToastsManager } from 'ng2-toastr';
+import { PushNotificationComponent } from 'ng2-notifications';
 
 import { ChatThreadsComponent } from './chat-threads';
 import { ChatWindowComponent } from './chat-window';
@@ -15,7 +16,8 @@ import { UserService, ThreadService, MessageService, Thread, Message, User, Sock
 @Component({
   selector: 'chat-container',
   directives: [ChatThreadsComponent,
-               ChatWindowComponent],
+               ChatWindowComponent,
+               PushNotificationComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: 'app/chat-container/chat-container.component.html',
   styleUrls: ['app/chat-container/chat-container.component.css']
