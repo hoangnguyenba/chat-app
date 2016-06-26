@@ -9,9 +9,10 @@
     </div>
   </div>
 
-  <push-notification 
+  <push-notification #notification
     title="ng2-notifications"
     body="Component for Native Push Notifications"
-    icon="https://goo.gl/3eqeiE">
+    icon="https://goo.gl/3eqeiE"
+    (load)="notification.show()">
   </push-notification>
 </div>

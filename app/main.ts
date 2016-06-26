@@ -6,7 +6,13 @@ import { AuthConfig, AuthHttp, AUTH_PROVIDERS, JwtHelper } from 'angular2-jwt';
 
 import { AppComponent } from './app.component';
 
-import { UserService, ThreadService, MessageService, ChatUtilService, SocketService, AuthService } from './shared';
+import {    UserService, 
+            ThreadService, 
+            MessageService, 
+            ChatUtilService, 
+            SocketService, 
+            AuthService,
+            PushNotificationService } from './shared';
 
 import { APP_CONFIG, CHAT_APP_CONFIG, AppConfig } from './config';
 
@@ -24,7 +30,13 @@ bootstrap(AppComponent, [
                             UserService,
                             ThreadService,
                             SocketService,
-                            ToastsManager
+                            ToastsManager,
+                            // PushNotificationService
+                            provide(PushNotificationService, { 
+                                useFactory: () => {
+                                    return new PushNotificationService("Chat App");
+                                }
+                            })
                             // {
                             //     provide: SocketService,
                             //     useFactory: (   config:AppConfig, 

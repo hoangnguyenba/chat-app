@@ -7,4 +7,5 @@ export * from './thread.service';
 export * from './user.service';
 export * from './auth.service';
 export * from './chat-util'
+export * from './notification.service';
 export * from './socket.service';

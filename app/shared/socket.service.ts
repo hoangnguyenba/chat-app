@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { APP_CONFIG, AppConfig } from '../config';
 
-import { ThreadService, MessageService, UserService, ChatUtilService, Message, User, Thread } from '../shared';
+import { ThreadService, MessageService, UserService, ChatUtilService, Message, User, Thread, PushNotificationService } from '../shared';
 
 import * as _ from 'underscore';
 
@@ -21,7 +21,8 @@ export class SocketService {
                 private messageService: MessageService,
                 private threadService: ThreadService,
                 private chatUtilService: ChatUtilService,
-                private userService: UserService
+                private userService: UserService,
+                private notificationService: PushNotificationService
                 )
      { 
         this.socket = new io(this.config.apiEndpoint);
@@ -58,6 +59,7 @@ export class SocketService {
     // an imperative function call to this action stream
     addMessage(message: Message): void {
         this.socket.emit('chat_message', message);
+        this.notificationService.create();
     }
 
     // mark thread as read

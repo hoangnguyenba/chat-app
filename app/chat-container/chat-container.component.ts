@@ -6,18 +6,25 @@ import {
 
 import { JwtHelper } from 'angular2-jwt';
 import { ToastsManager } from 'ng2-toastr';
-import { PushNotificationComponent } from 'ng2-notifications';
+// import { PushNotificationComponent } from './notification.component';
 
 import { ChatThreadsComponent } from './chat-threads';
 import { ChatWindowComponent } from './chat-window';
 
-import { UserService, ThreadService, MessageService, Thread, Message, User, SocketService, ChatUtilService } from '../shared';
+import {    UserService,
+            ThreadService,
+            MessageService,
+            Thread,
+            Message,
+            User,
+            SocketService,
+            ChatUtilService,
+            PushNotificationService } from '../shared';
 
 @Component({
   selector: 'chat-container',
   directives: [ChatThreadsComponent,
-               ChatWindowComponent,
-               PushNotificationComponent],
+               ChatWindowComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: 'app/chat-container/chat-container.component.html',
   styleUrls: ['app/chat-container/chat-container.component.css']
@@ -31,7 +38,8 @@ export class ChatContainerComponent implements OnInit {
         private jwtHelper: JwtHelper,
         private socketService: SocketService,
         private chatUtilService: ChatUtilService,
-        public toastr: ToastsManager
+        public toastr: ToastsManager,
+        private notification: PushNotificationService
         )
         {
         }
@@ -152,6 +160,7 @@ export class ChatContainerComponent implements OnInit {
         });
 
         this.toastr.success('Welcome back ' + currentUser.name);
+        this.notification.create();
 
         this.socketService.start();
     }
