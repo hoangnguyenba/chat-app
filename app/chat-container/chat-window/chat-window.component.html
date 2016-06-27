@@ -1,4 +1,4 @@
-<div class="panel panel-default">
+<div class="chatwindow panel panel-default">
 
     <div class="panel-heading top-bar">
         <div class="panel-title-container">
@@ -18,15 +18,19 @@
 
     <div class="panel-footer">
 
-        <div class="input-group">
-        <input type="text"
-                class="form-control" 
+        <div class="panel panel-default">
+            <div class="panel-heading top-bar">
+                <div class="panel-title-container">
+                    <button type="button" class="btn btn-default" (click)="onEnter($event)">Send</button>
+                </div>
+            </div>
+            <textarea style="width: 100%" rows="5"
                 placeholder="Write your message here..." 
-                aria-describedby="basic-addon2"
                 (keydown.enter)="onEnter($event)"
                 [(ngModel)]="draftMessage.text">
-        <span class="input-group-addon" (click)="onEnter($event)">Send</span>
+            </textarea>
         </div>
+
     </div>
 
 </div>

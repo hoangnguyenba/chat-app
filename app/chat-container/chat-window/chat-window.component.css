@@ -1,19 +1,19 @@
-.panel {
+.chatwindow.panel {
   display: flex;
   flex-flow: column;
   height: 100%;
   margin-bottom: 0;
 }
 
-.panel .panel-heading {
+.chatwindow.panel > .panel-heading {
   flex: 0 1 auto;
 }
 
-.panel .panel-body  {
+.chatwindow.panel > .panel-body  {
   flex: 1 1 auto;
   overflow-y: auto;
 }
 
-.panel .panel-footer {
+.chatwindow.panel > .panel-footer {
   flex: 0 1 auto;
 }
