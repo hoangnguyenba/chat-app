@@ -27,6 +27,7 @@ import { ChatMessageComponent } from './chat-message.component';
   styleUrls: ['app/chat-container/chat-window/chat-window.component.css']
 })
 export class ChatWindowComponent implements OnInit {
+  isPressEnter: boolean = true;
   messages: Observable<any>;
   currentThread: Thread;
   draftMessage: Message;
@@ -63,11 +64,14 @@ export class ChatWindowComponent implements OnInit {
 
   }
   onEnter(event: any): void {
+    if(!this.isPressEnter && !event.ctrlKey)
+      return;
     this.sendMessage();
     event.preventDefault();
   }
 
   sendMessage(): void {
+    console.log(this.isPressEnter);
     let m: Message = this.draftMessage;
     m.author = this.currentUser;
     m.thread = this.currentThread;

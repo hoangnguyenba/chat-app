@@ -18,18 +18,22 @@
 
     <div class="panel-footer">
 
-        <div class="panel panel-default">
-            <div class="panel-heading top-bar">
-                <div class="panel-title-container">
-                    <button type="button" class="btn btn-default" (click)="onEnter($event)">Send</button>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <div class="container-fluid">
+                    <a class="btn btn-default pull-right" (click)="onEnter($event)">Send</a>
+                    <input [(ngModel)]="isPressEnter" type="checkbox" class="pull-right"> <span class="pull-right">Press Enter to send </span>
                 </div>
-            </div>
-            <textarea style="width: 100%" rows="5"
-                placeholder="Write your message here..." 
-                (keydown.enter)="onEnter($event)"
-                [(ngModel)]="draftMessage.text">
-            </textarea>
-        </div>
+            </li>
+            <li class="list-group-item">
+                <textarea style="width: 100%" rows="5"
+                    placeholder="Write your message here..." 
+                    (keydown.enter)="onEnter($event)"
+                    (keydown.control.Enter)="onEnter($event)"
+                    [(ngModel)]="draftMessage.text">
+                </textarea>
+            </li>
+        </ul>
 
     </div>
 
