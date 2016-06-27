@@ -1,7 +1,11 @@
 import { Injectable, Inject } from '@angular/core';
 import { APP_CONFIG, AppConfig } from '../config';
 
-import { ThreadService, MessageService, UserService, ChatUtilService, Message, User, Thread, PushNotificationService } from '../shared';
+import { ThreadService, MessageService, UserService, ChatUtilService, Message, User, Thread,
+    PushNotificationService,
+    PageVisibilityService,
+    NotificationConfig
+} from '../shared';
 
 import * as _ from 'underscore';
 
@@ -22,7 +26,8 @@ export class SocketService {
                 private threadService: ThreadService,
                 private chatUtilService: ChatUtilService,
                 private userService: UserService,
-                private notificationService: PushNotificationService
+                private notificationService: PushNotificationService,
+                private pageVisibilityService: PageVisibilityService
                 )
      { 
         this.socket = new io(this.config.apiEndpoint);
@@ -54,12 +59,17 @@ export class SocketService {
 
         var message = this.chatUtilService.convertMessageFromServer(data, thread, this.currentUser);
         this.messageService.newMessages.next(message);
+
+        // Check if Chat App is not active, show notification
+        if(!this.pageVisibilityService.isVisible())
+        {
+            this.notificationService.text(message.text);
+        }
     }
 
     // an imperative function call to this action stream
     addMessage(message: Message): void {
         this.socket.emit('chat_message', message);
-        this.notificationService.create();
     }
 
     // mark thread as read

@@ -1,17 +1,27 @@
 declare var Notification: any;
 
-export class PushNotificationService {
+export interface INotificationConfig {
+  title?: string;
+  body?: string;
+  icon?: string;
+  sound?: string;
+  data?: any;
+  tag?: string;
+  dir?: string;
+  lang?: string;
+  renotify?: boolean;
+  sticky?: boolean;
+  vibrate?: Array<number>;
+  noscreen?: boolean;
+  silent?: boolean;
+  closeDelay?: number;
+}
 
-  public static get DEFAULT():string { return "default"; }
-  public static get GRANTED():string { return "granted"; }
-  public static get DENIED():string { return "denied"; }
-
-  private static _isCompatibility: boolean = false;
-  private static _isPermissionGranted: boolean = false;
-
+export class NotificationConfig {
+   
   public title: string = "Notification";
   public body: string = "";
-  public icon: string;
+  public icon: string = "/favicon.ico";
   public sound: string;
   public data: any;
   public tag: string;
@@ -24,19 +34,86 @@ export class PushNotificationService {
   public silent: boolean = true;
   public closeDelay: number = 0;
 
+  constructor(config:any={}) {
+    this.title = config.title || this.title;
+    this.body = config.body || this.body;
+    this.icon = config.icon || this.icon;
+    this.sound = config.sound || this.sound;
+    this.data = config.data || this.data;
+    this.tag = config.tag || this.tag;
+    this.dir = config.dir || this.dir;
+    this.lang = config.lang || this.lang;
+    this.renotify = config.renotify || this.renotify;
+    this.sticky = config.sticky || this.sticky;
+    this.vibrate = config.vibrate || this.vibrate;
+    this.noscreen = config.noscreen || this.noscreen;
+    this.silent = config.silent || this.silent;
+    this.closeDelay = config.closeDelay || this.closeDelay;
+  }
+
+  getConfig(): INotificationConfig {
+    return {
+      title: this.title,
+      body: this.body,
+      icon: this.icon,
+      sound: this.sound,
+      data: this.data,
+      tag: this.tag,
+      dir: this.dir,
+      lang: this.lang,
+      renotify: this.renotify,
+      sticky: this.sticky,
+      vibrate: this.vibrate,
+      noscreen: this.noscreen,
+      silent: this.silent,
+      closeDelay: this.closeDelay
+    }
+  }
+
+  mergeConfig(config: INotificationConfig): INotificationConfig {
+    return {
+      title : config.title || this.title,
+      body : config.body || this.body,
+      icon : config.icon || this.icon,
+      sound : config.sound || this.sound,
+      data : this.data || config.data,
+      tag : config.tag || this.tag,
+      dir : config.dir || this.dir,
+      lang : config.lang || this.lang,
+      renotify : config.renotify || this.renotify,
+      sticky : config.sticky || this.sticky,
+      vibrate : config.vibrate || this.vibrate,
+      noscreen : config.noscreen || this.noscreen,
+      silent : config.silent || this.silent,
+      closeDelay : config.closeDelay || this.closeDelay
+    }
+  }
+}
+
+export class PushNotificationService {
+
+  public static get DEFAULT():string { return "default"; }
+  public static get GRANTED():string { return "granted"; }
+  public static get DENIED():string { return "denied"; }
+
+  private static _isCompatibility: boolean = false;
+  private static _isPermissionGranted: boolean = false;
+
+  private _config: INotificationConfig;
+
   public onShow: Function = null;
   public onClose: Function = null;
   public onError: Function = null;
   public onClick: Function = null;
 
-  constructor(title: string) {
+  constructor(notificationConfig: NotificationConfig) {
       if (!this.checkCompatibility()) {
         console.log('Notification API not available in this browser.');
       } else {
         PushNotificationService._isCompatibility = true;
 
         // Assign options
-        this.title = title;
+        this._config = notificationConfig.getConfig();
 
         this.requestPermission((permission: string) => {
             if (permission === PushNotificationService.GRANTED) {
@@ -62,21 +139,32 @@ export class PushNotificationService {
     return Notification.requestPermission(callback);
   }
 
-  public create () {
+  public create (config?: NotificationConfig) {
     if (PushNotificationService.isCompatibility && PushNotificationService.isPermissionGranted) {
-      let notification = new Notification(this.title, {
-        dir: this.dir,
-        lang: this.lang,
-        data: this.data,
-        tag: this.tag,
-        body: this.body,
-        icon: this.icon,
-        silent: this.silent,
-        sound: this.sound,
-        renotify: this.renotify,
-        sticky: this.sticky,
-        vibrate: this.vibrate,
-        noscreen: this.noscreen
+
+      // Need merge options here
+      var tempConfig: INotificationConfig;
+      if(config)
+      {
+        tempConfig = config.mergeConfig(this._config);
+      }
+      else
+      {
+        tempConfig = this._config;
+      }
+      let notification = new Notification(tempConfig.title, {
+        dir: tempConfig.dir,
+        lang: tempConfig.lang,
+        data: tempConfig.data,
+        tag: tempConfig.tag,
+        body: tempConfig.body,
+        icon: tempConfig.icon,
+        silent: tempConfig.silent,
+        sound: tempConfig.sound,
+        renotify: tempConfig.renotify,
+        sticky: tempConfig.sticky,
+        vibrate: tempConfig.vibrate,
+        noscreen: tempConfig.noscreen
       });
 
       this.attachEventHandlers(notification);
@@ -86,11 +174,17 @@ export class PushNotificationService {
     }
   }
 
+  public text(text: string): void {
+    this.create(new NotificationConfig({
+      body: text
+    }));
+  }
+
   public close (notification: any): void {
-    if (this.closeDelay) {
+    if (this._config.closeDelay) {
       setTimeout(() => {
         notification.close();
-      }, this.closeDelay);
+      }, this._config.closeDelay);
     } else {
       notification.close();
     }

@@ -12,7 +12,9 @@ import {    UserService,
             ChatUtilService, 
             SocketService, 
             AuthService,
-            PushNotificationService } from './shared';
+            PushNotificationService,
+            NotificationConfig,
+            PageVisibilityService } from './shared';
 
 import { APP_CONFIG, CHAT_APP_CONFIG, AppConfig } from './config';
 
@@ -31,10 +33,13 @@ bootstrap(AppComponent, [
                             ThreadService,
                             SocketService,
                             ToastsManager,
+                            PageVisibilityService,
                             // PushNotificationService
                             provide(PushNotificationService, { 
                                 useFactory: () => {
-                                    return new PushNotificationService("Chat App");
+                                    return new PushNotificationService(new NotificationConfig({
+                                        title: "Chat App"
+                                    }));
                                 }
                             })
                             // {

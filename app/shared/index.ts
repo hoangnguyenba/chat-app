@@ -8,4 +8,5 @@ export * from './user.service';
 export * from './auth.service';
 export * from './chat-util'
 export * from './notification.service';
+export * from './page-visibility.service';
 export * from './socket.service';
