@@ -6,7 +6,6 @@ import {
 
 import { JwtHelper } from 'angular2-jwt';
 import { ToastsManager } from 'ng2-toastr';
-// import { PushNotificationComponent } from './notification.component';
 
 import { ChatThreadsComponent } from './chat-threads';
 import { ChatWindowComponent } from './chat-window';
