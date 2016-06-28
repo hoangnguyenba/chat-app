@@ -4,7 +4,7 @@ import {
   Inject
 } from '@angular/core';
 
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 
 import { APP_CONFIG, AppConfig } from '../../config';
 import { ThreadService, MessageService, Thread, Message } from '../../shared';

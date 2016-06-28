@@ -1,7 +1,10 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http, Response } from '@angular/http';
 
-import {Subject, Observable} from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/publishReplay';
+import { Subject } from 'rxjs/Subject';
+import { scan } from 'rxjs/operator/scan';
 
 import { AuthHttp } from 'angular2-jwt';
 

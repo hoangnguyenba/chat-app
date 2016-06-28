@@ -1,8 +1,11 @@
-import {Injectable, bind, Inject} from '@angular/core';
-import {Subject, BehaviorSubject, Observable} from 'rxjs/Rx';
+import { Injectable, bind, Inject } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/combineLatest';
 import { AuthHttp } from 'angular2-jwt';
 import { APP_CONFIG, AppConfig } from '../config';
-import {Thread, Message, MessageService} from '../shared';
+import { Thread, Message, MessageService } from '../shared';
 import * as _ from 'underscore';
 
 @Injectable()

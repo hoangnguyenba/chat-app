@@ -13,7 +13,7 @@ import {
   UserService
 } from '../../shared';
 
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { User, Thread, Message, SocketService } from '../../shared';
 
 import { ChatMessageComponent } from './chat-message.component';
@@ -71,7 +71,6 @@ export class ChatWindowComponent implements OnInit {
   }
 
   sendMessage(): void {
-    console.log(this.isPressEnter);
     let m: Message = this.draftMessage;
     m.author = this.currentUser;
     m.thread = this.currentThread;

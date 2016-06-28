@@ -2,7 +2,9 @@ import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 
-import { Subject, BehaviorSubject, Observable } from 'rxjs/Rx';
+import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable'
 
 import { APP_CONFIG, AppConfig } from '../config';
 import { User } from './user.model';
