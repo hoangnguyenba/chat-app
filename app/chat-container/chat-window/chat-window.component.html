@@ -18,26 +18,27 @@
 
     <div class="panel-footer">
 
-        <ul class="list-group">
-            <li class="list-group-item">
-                <form class="form-inline">
-                    <div class="checkbox">
-                        <label>
-                        <input [(ngModel)]="isPressEnter" type="checkbox"> Press Enter to send
-                        </label>
-                    </div>
-                    <button type="submit" class="btn btn-default" (click)="onEnter($event)">Send</button>
-                </form>
-            </li>
-            <li class="list-group-item">
-                <textarea class="form-control" rows="5"
+
+        <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            
+            <form class="navbar-form navbar-right">
+                <div class="checkbox">
+                    <label>
+                    <input [(ngModel)]="isPressEnter" type="checkbox"> Press Enter to send
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-default" (click)="onEnter($event)">Send</button>
+            </form>
+        </div><!-- /.container-fluid -->
+        </nav>
+
+        <textarea class="form-control" rows="5"
                     placeholder="Write your message here..." 
                     (keydown.enter)="onEnter($event)"
                     (keydown.control.Enter)="onEnter($event)"
                     [(ngModel)]="draftMessage.text">
-                </textarea>
-            </li>
-        </ul>
+        </textarea>
 
     </div>
 
