@@ -1,2 +1,3 @@
-
-<span> <b>{{message.author.name}}</b> </span><pre>{{message.text}}</pre>
+<div *ngIf="message.author">
+    <span *ngIf="lastAuthor == null || lastAuthor.id != message.author.id"> <b>{{message.author.name}}</b> </span><pre>{{message.text}} {{ message.thread.lastmessage }}</pre>
+</div>

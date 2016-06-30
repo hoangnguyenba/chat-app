@@ -12,7 +12,10 @@
     <div class="panel-body msg-container-base">
         <chat-message
             *ngFor="let message of messages | async"
-            [message]="message">
+            [message]="message"
+            (updateLastAuthor)="updateLastAuthor($event)"
+            [lastAuthor]="lastAuthor"
+            >
         </chat-message>
     </div>
 

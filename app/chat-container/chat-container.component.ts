@@ -113,7 +113,7 @@ export class ChatContainerComponent implements OnInit {
                             });
                     });
 
-                this.threadsService.setCurrentThread(thread);
+                // this.threadsService.setCurrentThread(thread);
 
             });
         });

@@ -36,11 +36,23 @@ export class ThreadService {
         messages.map((message: Message) => {
           threads[message.thread.id] = threads[message.thread.id] ||
             message.thread;
+
+          // Cache the most recent message for each thread
+          let messagesThread: Thread = threads[message.thread.id];
+          if (!messagesThread.lastMessage ||
+              messagesThread.lastMessage.sentAt < message.sentAt) {
+
+                // can't assign messagesThread.lastMessage = message
+                var temp = new Message();
+                temp.author = message.author;
+                temp.isRead = message.isRead;
+                temp.sentAt = message.sentAt;
+                messagesThread.lastMessage = temp;
+          }
         });
+
         return threads;
       });
-      // .publishReplay(1)
-      // .refCount();
 
     this.orderedThreads = this.threads
       .map((threadGroups: { [key: string]: Thread }) => {

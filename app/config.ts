@@ -8,6 +8,6 @@ export interface AppConfig {
 }
 
 export const CHAT_APP_CONFIG: AppConfig = {
-  apiEndpoint: 'http://localhost:8080/',
+  apiEndpoint: 'http://localhost:3100/',
   title: "Chat App"
 };

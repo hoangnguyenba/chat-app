@@ -32,6 +32,7 @@ export class ChatWindowComponent implements OnInit {
   currentThread: Thread;
   draftMessage: Message;
   currentUser: User;
+  lastAuthor: User;
 
   constructor(private messageService: MessageService,
               private threadService: ThreadService,
@@ -84,6 +85,10 @@ export class ChatWindowComponent implements OnInit {
     let scrollPane: any = this.el
       .nativeElement.querySelector('.msg-container-base');
     scrollPane.scrollTop = scrollPane.scrollHeight;
+  }
+
+  updateLastAuthor(author: User): void {
+    this.lastAuthor = author;
   }
 
 }

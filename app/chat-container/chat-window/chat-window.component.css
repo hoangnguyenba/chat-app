@@ -1,4 +1,4 @@
-.chatwindow.panel {
+/*.chatwindow.panel {
   display: flex;
   flex-flow: column;
   height: 100%;
@@ -16,4 +16,4 @@
 
 .chatwindow.panel > .panel-footer {
   flex: 0 1 auto;
-}
+}*/
