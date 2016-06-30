@@ -1,3 +1,11 @@
-<div *ngIf="message.author">
-    <span *ngIf="lastAuthor == null || lastAuthor.id != message.author.id"> <b>{{message.author.name}}</b> </span><pre>{{message.text}} {{ message.thread.lastmessage }}</pre>
+<div *ngIf="message.author" class="media">
+  <div *ngIf="lastAuthor == null || index == 0 || lastAuthor.id != message.author.id" class="media-left">
+    <a href="#">
+      <img class="media-object" [src]="message.author.logo" alt="...">
+    </a>
+  </div>
+  <div class="media-body">
+    <h4 *ngIf="lastAuthor == null || index == 0 || lastAuthor.id != message.author.id" class="media-heading">{{message.author.name}}</h4>
+    <pre>{{message.text}}</pre>
+  </div>
 </div>

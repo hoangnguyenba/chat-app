@@ -61,7 +61,8 @@ export class ChatContainerComponent implements OnInit {
                 currentUser = new User(
                         {
                             id: decode_toke.id, 
-                            name: decode_toke.name
+                            name: decode_toke.name,
+                            logo: decode_toke.logo
                         }
                     );
                 this.userService.setCurrentUser(currentUser);

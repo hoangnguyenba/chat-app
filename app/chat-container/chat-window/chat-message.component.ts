@@ -18,6 +18,7 @@ import {Message, User} from '../../shared';
 export class ChatMessageComponent implements OnInit {
   @Input() message: Message;
   @Input() lastAuthor: User;
+  @Input() index: number;
   @Output() updateLastAuthor = new EventEmitter();
   isNewAuthor: boolean;
 
@@ -25,10 +26,6 @@ export class ChatMessageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    console.log(this.message);
-    console.log(this.lastAuthor);
-
     this.updateLastAuthor.next(this.message.author);
   }
 
