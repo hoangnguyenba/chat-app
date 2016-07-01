@@ -13,8 +13,8 @@ import { ChatThreadComponent } from './chat-thread.component';
 @Component({
   selector: 'chat-threads',
   directives: [ChatThreadComponent],
-  templateUrl: 'app/chat-container/+chat-threads/chat-threads.component.html',
-  styleUrls: ['app/chat-container/+chat-threads/chat-threads.component.css']
+  templateUrl: 'app/+chat-container/+chat-threads/chat-threads.component.html',
+  styleUrls: ['app/+chat-container/+chat-threads/chat-threads.component.css']
 })
 export class ChatThreadsComponent implements OnInit {
 

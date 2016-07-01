@@ -25,8 +25,8 @@ import {    UserService,
   directives: [ChatThreadsComponent,
                ChatWindowComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: 'app/chat-container/chat-container.component.html',
-  styleUrls: ['app/chat-container/chat-container.component.css']
+  templateUrl: 'app/+chat-container/chat-container.component.html',
+  styleUrls: ['app/+chat-container/chat-container.component.css']
 })
 export class ChatContainerComponent implements OnInit {
 

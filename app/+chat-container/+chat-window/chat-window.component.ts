@@ -23,8 +23,8 @@ import { ChatMessageComponent } from './chat-message.component';
   directives: [ChatMessageComponent,
                FORM_DIRECTIVES],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: 'app/chat-container/+chat-window/chat-window.component.html',
-  styleUrls: ['app/chat-container/+chat-window/chat-window.component.css']
+  templateUrl: 'app/+chat-container/+chat-window/chat-window.component.html',
+  styleUrls: ['app/+chat-container/+chat-window/chat-window.component.css']
 })
 export class ChatWindowComponent implements OnInit {
   isPressEnter: boolean = true;

@@ -4,7 +4,7 @@ import { Thread, ThreadService, MessageService, SocketService, Message } from '.
 
 @Component({
     selector: 'chat-thread',
-    templateUrl: 'app/chat-container/+chat-threads/chat-thread.component.html'
+    templateUrl: 'app/+chat-container/+chat-threads/chat-thread.component.html'
 })
 export class ChatThreadComponent implements OnInit {
 
