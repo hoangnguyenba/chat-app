@@ -1,4 +1,7 @@
-<li class="list-group-item" (click)="clicked($event)" [class.active]="selected">
+<!--<li class="list-group-item" (click)="clicked($event)" [class.active]="selected">
     <span *ngIf="unreadMessagesCount > 0" class="badge">{{unreadMessagesCount}}</span>
     {{thread.name}}
-</li>
+</li>-->
+
+
+<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>{{thread.name}}</span></a></li>
