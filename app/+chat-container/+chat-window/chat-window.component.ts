@@ -3,6 +3,7 @@ import {
   OnInit,
   ElementRef,
   ChangeDetectionStrategy,
+  Input
 } from '@angular/core';
 
 import {FORM_DIRECTIVES} from '@angular/common';
@@ -33,6 +34,7 @@ export class ChatWindowComponent implements OnInit {
   draftMessage: Message;
   currentUser: User;
   lastAuthor: User;
+  @Input() parentHeight: number;
 
   constructor(private messageService: MessageService,
               private threadService: ThreadService,
@@ -42,6 +44,10 @@ export class ChatWindowComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.parentHeight);
+    // Calculate height of body box
+    this.fixWindow();
+
     this.messages = this.threadService.currentThreadMessages;
 
     this.draftMessage = new Message();
@@ -91,4 +97,12 @@ export class ChatWindowComponent implements OnInit {
     this.lastAuthor = author;
   }
 
+  private fixWindow() {
+    let elHeader = this.el.nativeElement.children[0].children[0];
+    let elBody = this.el.nativeElement.children[0].children[1];
+    let elFooter = this.el.nativeElement.children[0].children[2];
+
+    let minHeight = this.parentHeight - (elHeader.offsetHeight + elFooter.offsetHeight + 70);      
+    elBody.style.height = minHeight + 'px';
+  }
 }

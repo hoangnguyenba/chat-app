@@ -17,3 +17,7 @@
 .chatwindow.panel > .panel-footer {
   flex: 0 1 auto;
 }*/
+
+.box-body.chat {
+  overflow-y: auto;
+}

@@ -34,6 +34,8 @@ import {    UserService,
 })
 export class ChatContainerComponent implements OnInit {
 
+    private heightMain: number = 0;
+
     constructor(
         private messageService: MessageService,
         private userService: UserService,
@@ -185,11 +187,12 @@ export class ChatContainerComponent implements OnInit {
         let elMain = this.elRef.nativeElement.children[2];
         let elSidebarMenu = elSidebar.children[0];
         let heightWindowInder = window.innerHeight;
-
+        this.heightMain = elMain.offsetHeight;
         if(heightWindowInder >= (elHeader.offsetHeight + elFooter.offsetHeight + elSidebarMenu.offsetHeight))
         {
             let minHeight = heightWindowInder - (elHeader.offsetHeight + elFooter.offsetHeight);      
             elMain.style.minHeight = minHeight + 'px';
+            this.heightMain = elMain.offsetHeight;
         }
     }
 
