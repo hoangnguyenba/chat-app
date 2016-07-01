@@ -21,3 +21,7 @@
 .box-body.chat {
   overflow-y: auto;
 }
+
+chat-message {
+  overflow:auto; 
+}

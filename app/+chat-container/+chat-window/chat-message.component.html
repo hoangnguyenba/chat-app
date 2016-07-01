@@ -11,10 +11,10 @@
 </div>-->
 
 <div *ngIf="message.author" class="item">
-    <img [src]="message.author.logo" alt="{{message.author.name}}">
+    <img *ngIf="isNewAuthor()" [src]="message.author.logo" alt="{{message.author.name}}">
 
-    <p class="message">
-        <a href="#" class="name">
+    <p class="message" [class.first_message]="isNewAuthor()">
+        <a *ngIf="isNewAuthor()" href="#" class="name">
         <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> {{message.sentAt | date:"h:m"}}</small>
         {{message.author.name}}
         </a>
