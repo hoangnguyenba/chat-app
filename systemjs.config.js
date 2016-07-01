@@ -23,7 +23,7 @@
     '+chat-container':             'app/+chat-container',
     '+chat-threads':               'app/+chat-container/+chat-threads',
     '+chat-window':                'app/+chat-container/+chat-window',
-    'login':                      'app/login'
+    '+login':                      'app/+login'
   };
 
   // packages tells the System loader how to load when no filename and/or no extension

@@ -6,8 +6,8 @@ import { AuthService } from '../shared/auth.service';
 @Component({
   selector: 'login',
   directives: [ CORE_DIRECTIVES, FORM_DIRECTIVES ],
-  templateUrl: 'app/login/login.component.html',
-  styleUrls: ['app/login/login.component.css']
+  templateUrl: 'app/+login/login.component.html',
+  styleUrls: ['app/+login/login.component.css']
 })
 export class LoginComponent {
   constructor(private authService: AuthService

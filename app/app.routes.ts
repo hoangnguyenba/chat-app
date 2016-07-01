@@ -1,7 +1,7 @@
 import { provideRouter, RouterConfig } from '@angular/router';
 
 import { ChatContainerComponent } from './+chat-container/chat-container.component';
-import { LoginRoutes, AUTH_PROVIDERS } from './login/login.routes';
+import { LoginRoutes, AUTH_PROVIDERS } from './+login/login.routes';
 import { AuthGuard } from './auth.guard';
 
 export const routes: RouterConfig = [
