@@ -82,9 +82,9 @@ export class ChatWindowComponent implements OnInit {
   }
 
   scrollToBottom(): void {
-    let scrollPane: any = this.el
-      .nativeElement.querySelector('.msg-container-base');
-    scrollPane.scrollTop = scrollPane.scrollHeight;
+    // let scrollPane: any = this.el
+    //   .nativeElement.querySelector('.msg-container-base');
+    // scrollPane.scrollTop = scrollPane.scrollHeight;
   }
 
   updateLastAuthor(author: User): void {

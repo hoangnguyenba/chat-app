@@ -1,4 +1,4 @@
-<div *ngIf="message.author" class="media">
+<!--<div *ngIf="message.author" class="media">
   <div *ngIf="lastAuthor == null || index == 0 || lastAuthor.id != message.author.id" class="media-left">
     <a href="#">
       <img class="media-object" [src]="message.author.logo" alt="...">
@@ -8,4 +8,17 @@
     <h4 *ngIf="lastAuthor == null || index == 0 || lastAuthor.id != message.author.id" class="media-heading">{{message.author.name}}</h4>
     <pre>{{message.text}}</pre>
   </div>
+</div>-->
+
+
+<div *ngIf="message.author" class="item">
+    <img [src]="message.author.logo" alt="{{message.author.name}}">
+
+    <p class="message">
+        <a href="#" class="name">
+        <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> {{message.sentAt | date:"h:m"}}</small>
+        {{message.author.name}}
+        </a>
+        {{message.text}}
+    </p>
 </div>
