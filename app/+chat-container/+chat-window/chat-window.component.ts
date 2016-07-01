@@ -44,7 +44,6 @@ export class ChatWindowComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.parentHeight);
     // Calculate height of body box
     this.fixWindow();
 
