@@ -7,7 +7,7 @@ import {
 import { JwtHelper } from 'angular2-jwt';
 import { ToastsManager } from 'ng2-toastr';
 
-import { ChatThreadsComponent } from './chat-threads';
+import { ChatThreadsComponent } from './+chat-threads';
 import { ChatWindowComponent } from './+chat-window';
 
 import {    UserService,

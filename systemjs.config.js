@@ -21,7 +21,7 @@
     // for barrels
     'shared':                     'app/shared',
     'chat-container':             'app/chat-container',
-    'chat-threads':               'app/chat-container/chat-threads',
+    '+chat-threads':               'app/chat-container/+chat-threads',
     '+chat-window':                'app/chat-container/+chat-window',
     'login':                      'app/login'
   };
@@ -42,7 +42,7 @@
     // for barrels
     'shared':                     { main: 'index.js',  defaultExtension: 'js' },
     'chat-container':                     { main: 'index.js',  defaultExtension: 'js' },
-    'chat-threads':                     { main: 'index.js',  defaultExtension: 'js' },
+    '+chat-threads':                     { main: 'index.js',  defaultExtension: 'js' },
     '+chat-window':                     { main: 'index.js',  defaultExtension: 'js' },
     'window':                     { main: 'index.js',  defaultExtension: 'js' },
   };
