@@ -1,2 +1,2 @@
 export * from './chat-threads';
-export * from './chat-window';
+export * from './+chat-window';

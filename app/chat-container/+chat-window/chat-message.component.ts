@@ -13,7 +13,7 @@ import {Message, User} from '../../shared';
 
 @Component({
   selector: 'chat-message',
-  templateUrl: 'app/chat-container/chat-window/chat-message.component.html'
+  templateUrl: 'app/chat-container/+chat-window/chat-message.component.html'
 })
 export class ChatMessageComponent implements OnInit {
   @Input() message: Message;
