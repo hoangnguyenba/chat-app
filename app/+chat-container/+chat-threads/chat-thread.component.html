@@ -3,5 +3,8 @@
     {{thread.name}}
 </li>-->
 
-
-<li (click)="clicked($event)"><a href="#"><i class="fa fa-circle-o text-green"></i> <span>{{thread.name}}</span></a></li>
+<li [class.active]="selected" (click)="clicked($event)">
+    <a href="#"><i class="fa fa-circle-o text-green"></i> <span>{{thread.name}}</span>
+    <small *ngIf="unreadMessagesCount > 0" class="label pull-right bg-red">{{unreadMessagesCount}}</small>
+    </a>
+</li>

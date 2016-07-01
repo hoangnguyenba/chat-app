@@ -30,3 +30,15 @@ li.active > a {
   background: #1e282c;
   border-left-color: #3c8dbc;
 }
+
+
+li > a >.pull-right {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -7px;
+}
+
+li .badge {
+    margin-right: 5px;
+}

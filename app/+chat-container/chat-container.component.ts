@@ -1,7 +1,8 @@
 import {
   Component,
   OnInit,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ElementRef
 } from '@angular/core';
 
 import { JwtHelper } from 'angular2-jwt';
@@ -22,6 +23,9 @@ import {    UserService,
 
 @Component({
   selector: 'chat-container',
+  host : {
+      '(window:resize)' : 'onResize()'  
+    },
   directives: [ChatThreadsComponent,
                ChatWindowComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -37,13 +41,16 @@ export class ChatContainerComponent implements OnInit {
         private jwtHelper: JwtHelper,
         private socketService: SocketService,
         private chatUtilService: ChatUtilService,
-        public toastr: ToastsManager,
-        private notification: PushNotificationService
+        private toastr: ToastsManager,
+        private notification: PushNotificationService,
+        private elRef: ElementRef
         )
         {
         }
 
     ngOnInit(): void {
+        this.fixWindow();
+
         this.messageService.messages.subscribe(() => ({}));
 
         // set "Juliet" as the current user
@@ -163,6 +170,27 @@ export class ChatContainerComponent implements OnInit {
         this.notification.create();
 
         this.socketService.start();
+    }
+
+    onResize() {
+        this.fixWindow();
+    }
+
+    private fixWindow()
+    {
+        
+        let elHeader = this.elRef.nativeElement.children[0];
+        let elFooter = this.elRef.nativeElement.children[3];
+        let elSidebar = this.elRef.nativeElement.children[1];
+        let elMain = this.elRef.nativeElement.children[2];
+        let elSidebarMenu = elSidebar.children[0];
+        let heightWindowInder = window.innerHeight;
+
+        if(heightWindowInder >= (elHeader.offsetHeight + elFooter.offsetHeight + elSidebarMenu.offsetHeight))
+        {
+            let minHeight = heightWindowInder - (elHeader.offsetHeight + elFooter.offsetHeight);      
+            elMain.style.minHeight = minHeight + 'px';
+        }
     }
 
 }
