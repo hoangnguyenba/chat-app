@@ -9,12 +9,13 @@ import {
 } from '@angular/core';
 import {FORM_DIRECTIVES} from '@angular/common';
 
-import {Message, User} from '../../shared';
+import {Message, User} from '../../../shared';
 
 @Component({
+  moduleId: module.id,
   selector: 'chat-message',
-  templateUrl: 'app/+chat-container/+chat-window/chat-message.component.html',
-  styleUrls: ['app/+chat-container/+chat-window/chat-message.component.css'],
+  templateUrl: 'chat-message.component.html',
+  styleUrls: ['chat-message.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatMessageComponent implements DoCheck {

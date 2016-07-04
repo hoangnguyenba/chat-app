@@ -1,11 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Thread, ThreadService, MessageService, SocketService, Message } from '../../shared';
+import { Thread, ThreadService, MessageService, SocketService, Message } from '../../../shared';
 
 @Component({
+    moduleId: module.id,
     selector: 'chat-thread',
-    templateUrl: 'app/+chat-container/+chat-threads/chat-thread.component.html',
-    styleUrls: ['app/+chat-container/+chat-threads/chat-thread.component.css']
+    templateUrl: 'chat-thread.component.html',
+    styleUrls: ['chat-thread.component.css']
 })
 export class ChatThreadComponent implements OnInit {
 

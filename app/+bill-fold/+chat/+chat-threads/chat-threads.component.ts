@@ -6,15 +6,16 @@ import {
 
 import { Observable } from 'rxjs/Observable';
 
-import { APP_CONFIG, AppConfig } from '../../config';
-import { ThreadService, MessageService, Thread, Message } from '../../shared';
+import { APP_CONFIG, AppConfig } from '../../../config';
+import { ThreadService, MessageService, Thread, Message } from '../../../shared';
 import { ChatThreadComponent } from './chat-thread.component';
 
 @Component({
+  moduleId: module.id,
   selector: 'chat-threads',
   directives: [ChatThreadComponent],
-  templateUrl: 'app/+chat-container/+chat-threads/chat-threads.component.html',
-  styleUrls: ['app/+chat-container/+chat-threads/chat-threads.component.css']
+  templateUrl: 'chat-threads.component.html',
+  styleUrls: ['chat-threads.component.css']
 })
 export class ChatThreadsComponent implements OnInit {
 

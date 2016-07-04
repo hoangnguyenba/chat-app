@@ -12,20 +12,21 @@ import {
   MessageService,
   ThreadService,
   UserService
-} from '../../shared';
+} from '../../../shared';
 
 import { Observable } from 'rxjs/Observable';
-import { User, Thread, Message, SocketService } from '../../shared';
+import { User, Thread, Message, SocketService } from '../../../shared';
 
 import { ChatMessageComponent } from './chat-message.component';
 
 @Component({
+  moduleId: module.id,
   selector: 'chat-window',
   directives: [ChatMessageComponent,
                FORM_DIRECTIVES],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: 'app/+chat-container/+chat-window/chat-window.component.html',
-  styleUrls: ['app/+chat-container/+chat-window/chat-window.component.css']
+  templateUrl: 'chat-window.component.html',
+  styleUrls: ['chat-window.component.css']
 })
 export class ChatWindowComponent implements OnInit {
   isPressEnter: boolean = true;
