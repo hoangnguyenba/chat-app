@@ -67,7 +67,7 @@
     <chat-message
         *ngFor="let message of messages | async; let i=index"
         [message]="message"
-        (updateLastAuthor)="updateLastAuthor($event)"
+        (updatedLastAuthor)="updateLastAuthor($event)"
         [lastAuthor]="lastAuthor"
         [index]="i"
         >

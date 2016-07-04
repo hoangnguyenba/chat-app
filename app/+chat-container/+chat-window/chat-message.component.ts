@@ -1,6 +1,6 @@
 import {
   Component,
-  OnInit,
+  DoCheck,
   ElementRef,
   ChangeDetectionStrategy,
   Input,
@@ -14,19 +14,21 @@ import {Message, User} from '../../shared';
 @Component({
   selector: 'chat-message',
   templateUrl: 'app/+chat-container/+chat-window/chat-message.component.html',
-  styleUrls: ['app/+chat-container/+chat-window/chat-message.component.css']
+  styleUrls: ['app/+chat-container/+chat-window/chat-message.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChatMessageComponent implements OnInit {
+export class ChatMessageComponent implements DoCheck {
   @Input() message: Message;
   @Input() lastAuthor: User;
   @Input() index: number;
-  @Output() updateLastAuthor = new EventEmitter();
+  @Input() length: number;
+  @Output() updatedLastAuthor = new EventEmitter();
 
   constructor() {
   }
 
-  ngOnInit(): void {
-    this.updateLastAuthor.next(this.message.author);
+  ngDoCheck(): any {
+    this.updatedLastAuthor.next(this.message.author);
   }
 
   isNewAuthor() {

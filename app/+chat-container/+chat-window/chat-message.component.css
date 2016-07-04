@@ -1,5 +1,5 @@
 div.item {
-    min-height: 10px;
+    margin-bottom: 0;
 }
 
 .item > .message.first_message {
