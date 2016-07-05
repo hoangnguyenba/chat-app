@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 
 import { ROUTER_DIRECTIVES }  from '@angular/router';
 import { ChatThreadsComponent } from './+chat/+chat-threads';
@@ -27,7 +27,7 @@ import {    UserService,
       '(window:resize)' : 'onResize()'  
     }
 })
-export class BillFoldComponent implements OnInit, OnChanges {
+export class BillFoldComponent implements OnInit {
     private heightMain: number = 0;
     private currentUser: User;
     constructor(
@@ -38,9 +38,13 @@ export class BillFoldComponent implements OnInit, OnChanges {
         private socketService: SocketService,
         private chatUtilService: ChatUtilService,
         private toastr: ToastsManager,
-        private elRef: ElementRef) { }
+        private elRef: ElementRef) { 
+            console.log('########begin 1######');
+            console.log('########end 1######');
+        }
 
     ngOnInit() { 
+        console.log('########begin######');
         this.fixWindow();
 
         this.messageService.messages.subscribe(() => ({}));
@@ -124,14 +128,12 @@ export class BillFoldComponent implements OnInit, OnChanges {
         this.toastr.success('Welcome back ' + this.currentUser.name);
 
         this.socketService.start();
+
+        console.log('########end######');
     }
 
     onResize() {
         this.fixWindow();
-    }
-
-    ngOnChanges() {
-        console.log('bill fold ngOnChanges');
     }
 
     private fixWindow()

@@ -3,6 +3,7 @@ import { Http, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/publishReplay';
+import 'rxjs/add/operator/scan';
 import { Subject } from 'rxjs/Subject';
 import { scan } from 'rxjs/operator/scan';
 
