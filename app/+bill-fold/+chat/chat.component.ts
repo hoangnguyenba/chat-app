@@ -38,6 +38,7 @@ import {    UserService,
 export class ChatComponent implements OnInit {
 
     private heightMain: number = 0;
+    private currentUser: User;
 
     constructor(
         private messageService: MessageService,
@@ -57,6 +58,11 @@ export class ChatComponent implements OnInit {
     ngOnInit(): void {
         console.log('chat init caledddddddddddddddd');
 
+        // if current use doesn't exist (because remmber jwt)
+        this.userService.currentUser.subscribe(user => {
+            this.currentUser = user;
+        });
+
         this.route
         .params
         .subscribe(params => {
@@ -73,7 +79,7 @@ export class ChatComponent implements OnInit {
                             .subscribe((data) => {
                                 
                                 var messages_server:Message[] = data.Items.map((message: any) => {
-                                    return this.chatUtilService.convertMessageFromServer(message, thread, currentUser);
+                                    return this.chatUtilService.convertMessageFromServer(message, thread, this.currentUser);
                                 });
 
                                 // Add messages into message service
@@ -90,96 +96,6 @@ export class ChatComponent implements OnInit {
         });
 
         this.fixWindow();
-
-        this.messageService.messages.subscribe(() => ({}));
-
-        // set "Juliet" as the current user
-        // this.userService.setCurrentUser(me);
-
-        var currentUser: User;
-
-        // if current use doesn't exist (because remmber jwt)
-        var sup = this.userService.currentUser.subscribe(user => {
-            // try to load current
-            if(user == null)
-            {
-                var id_token = localStorage.getItem('id_token');
-                var decode_toke = this.jwtHelper.decodeToken(id_token);
-                currentUser = new User(
-                        {
-                            id: decode_toke.id, 
-                            name: decode_toke.name,
-                            logo: decode_toke.logo
-                        }
-                    );
-                this.userService.setCurrentUser(currentUser);
-            }
-            else
-            {
-                currentUser = user;
-            }
-        });
-        sup.unsubscribe();
-
-        // create the initial messages
-        // Get list user from server
-        this.userService.getUserList().subscribe(data => {
-            data.Items.forEach((user:any) => {
-                var thread_name: string;
-                if(user.id < currentUser.id)
-                    thread_name = user.id + ':' + currentUser.id;
-                else
-                    thread_name = currentUser.id + ':' + user.id;
-
-                // With every user, create a new thread
-                var thread: Thread = new Thread(
-                    {
-                        id: thread_name,
-                        name: user.name
-                    });
-
-                // create an empty message ( for add thread )
-                let messages_server = [new Message({
-                            isRead: true,
-                            thread: thread
-                        })];
-
-                // Add messages into message service
-                this.messageService.updates.next((messages: Message[]) => {
-                        return messages.concat(messages_server);
-                    });
-            });
-        });
-
-
-        // Get list thread from server
-        this.threadsService.getThreadList().subscribe(data => {
-            data.forEach((threadServer:any) => {
-                var thread_name: string = threadServer.thread_id;
-                // var thread: Thread = new Thread(threadServer);
-                var thread: Thread = new Thread(
-                {
-                    id: thread_name,
-                    name: threadServer.name
-                });
-
-                
-                let messages_server = [new Message({
-                            isRead: true,
-                            thread: thread
-                        })];
-
-                // Add messages into message service
-                this.messageService.updates.next((messages: Message[]) => {
-                        return messages.concat(messages_server);
-                    });
-            });
-        });
-
-        this.toastr.success('Welcome back ' + currentUser.name);
-        this.notification.create();
-
-        this.socketService.start();
     }
 
     onResize() {
