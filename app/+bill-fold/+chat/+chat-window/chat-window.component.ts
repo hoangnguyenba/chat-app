@@ -11,7 +11,8 @@ import {FORM_DIRECTIVES} from '@angular/common';
 import {
   MessageService,
   ThreadService,
-  UserService
+  UserService,
+  ChatUtilService
 } from '../../../shared';
 
 import { Observable } from 'rxjs/Observable';
@@ -35,12 +36,12 @@ export class ChatWindowComponent implements OnInit {
   draftMessage: Message;
   currentUser: User;
   lastAuthor: User;
-  @Input() parentHeight: number;
-
+  
   constructor(private messageService: MessageService,
               private threadService: ThreadService,
               private userService: UserService,
               private socketService: SocketService,
+              private chatUtilService: ChatUtilService,
               private el: ElementRef) {
   }
 
@@ -103,7 +104,7 @@ export class ChatWindowComponent implements OnInit {
     let elBody = this.el.nativeElement.children[0].children[1];
     let elFooter = this.el.nativeElement.children[0].children[2];
 
-    let minHeight = this.parentHeight - (elHeader.offsetHeight + elFooter.offsetHeight + 70);      
+    let minHeight = this.chatUtilService.mainHeight - (elHeader.offsetHeight + elFooter.offsetHeight + 60);      
     elBody.style.height = minHeight + 'px';
   }
 }

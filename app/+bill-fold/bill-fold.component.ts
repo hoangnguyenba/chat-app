@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, OnChanges, ElementRef } from '@angular/core';
 
 import { ROUTER_DIRECTIVES }  from '@angular/router';
 import { ChatThreadsComponent } from './+chat/+chat-threads';
@@ -22,9 +22,12 @@ import {    UserService,
     // template: '<router-outlet></router-outlet>',
     templateUrl: 'bill-fold.component.html',
     styleUrls: ['bill-fold.component.css'],
-    directives: [ROUTER_DIRECTIVES, ChatThreadsComponent]
+    directives: [ROUTER_DIRECTIVES, ChatThreadsComponent],
+    host : {
+      '(window:resize)' : 'onResize()'  
+    }
 })
-export class BillFoldComponent implements OnInit {
+export class BillFoldComponent implements OnInit, OnChanges {
     private heightMain: number = 0;
     private currentUser: User;
     constructor(
@@ -105,7 +108,6 @@ export class BillFoldComponent implements OnInit {
                     id: thread_name,
                     name: threadServer.name
                 });
-
                 
                 let messages_server = [new Message({
                             isRead: true,
@@ -124,9 +126,16 @@ export class BillFoldComponent implements OnInit {
         this.socketService.start();
     }
 
+    onResize() {
+        this.fixWindow();
+    }
+
+    ngOnChanges() {
+        console.log('bill fold ngOnChanges');
+    }
+
     private fixWindow()
     {
-        console.log(this.elRef.nativeElement);
         let elHeader = this.elRef.nativeElement.children[0];
         let elFooter = this.elRef.nativeElement.children[3];
         let elSidebar = this.elRef.nativeElement.children[1];
@@ -139,12 +148,11 @@ export class BillFoldComponent implements OnInit {
             let minHeight = heightWindowInder - (elHeader.offsetHeight + elFooter.offsetHeight);      
             elMain.style.minHeight = minHeight + 'px';
 
-            console.log(elMain.offsetHeight);
-            console.log(elMain.children[0].offsetHeight);
+            elMain.children[1].style.minHeight = (minHeight - elMain.children[0].offsetHeight) + 'px';
 
-            elMain.children[1].style.minHeight = elMain.offsetHeight - elMain.children[0].offsetHeight;
+            this.heightMain = minHeight - elMain.children[0].offsetHeight;
 
-            this.heightMain = elMain.offsetHeight;
+            this.chatUtilService.mainHeight = this.heightMain;
         }
     }
 

@@ -6,6 +6,8 @@ import { Message, Thread, User } from './index';
 @Injectable()
 export class ChatUtilService {
 
+    public mainHeight: number;
+    
     constructor() { }
 
     convertMessageFromServer(message:any, thread: Thread, user: User) : Message {
@@ -18,5 +20,4 @@ export class ChatUtilService {
                                 thread: thread
                             });
     }
-
 }

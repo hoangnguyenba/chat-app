@@ -2,7 +2,8 @@ import {
   Component,
   OnInit,
   ChangeDetectionStrategy,
-  ElementRef
+  ElementRef,
+  Input
 } from '@angular/core';
 
 import { Router, ActivatedRoute } from '@angular/router';
@@ -26,9 +27,6 @@ import {    UserService,
 @Component({
   moduleId: module.id,
   selector: 'chat',
-  host : {
-      '(window:resize)' : 'onResize()'  
-    },
   directives: [ChatThreadsComponent,
                ChatWindowComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -37,7 +35,6 @@ import {    UserService,
 })
 export class ChatComponent implements OnInit {
 
-    private heightMain: number = 0;
     private currentUser: User;
 
     constructor(
@@ -56,8 +53,6 @@ export class ChatComponent implements OnInit {
         }
 
     ngOnInit(): void {
-        console.log('chat init caledddddddddddddddd');
-
         // if current use doesn't exist (because remmber jwt)
         this.userService.currentUser.subscribe(user => {
             this.currentUser = user;
@@ -94,30 +89,6 @@ export class ChatComponent implements OnInit {
                 sup.unsubscribe();
             }
         });
-
-        this.fixWindow();
-    }
-
-    onResize() {
-        this.fixWindow();
-    }
-
-    private fixWindow()
-    {
-        // console.log(this.elRef.nativeElement);
-        // let elHeader = this.elRef.nativeElement.children[0];
-        // let elFooter = this.elRef.nativeElement.children[3];
-        // let elSidebar = this.elRef.nativeElement.children[1];
-        // let elMain = this.elRef.nativeElement.children[2];
-        // let elSidebarMenu = elSidebar.children[0];
-        // let heightWindowInder = window.innerHeight;
-        // this.heightMain = elMain.offsetHeight;
-        // if(heightWindowInder >= (elHeader.offsetHeight + elFooter.offsetHeight + elSidebarMenu.offsetHeight))
-        // {
-        //     let minHeight = heightWindowInder - (elHeader.offsetHeight + elFooter.offsetHeight);      
-        //     elMain.style.minHeight = minHeight + 'px';
-        //     this.heightMain = elMain.offsetHeight;
-        // }
     }
 
 }
