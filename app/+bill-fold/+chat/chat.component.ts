@@ -5,6 +5,8 @@ import {
   ElementRef
 } from '@angular/core';
 
+import { Router, ActivatedRoute } from '@angular/router';
+
 import { JwtHelper } from 'angular2-jwt';
 import { ToastsManager } from 'ng2-toastr';
 
@@ -46,12 +48,47 @@ export class ChatComponent implements OnInit {
         private chatUtilService: ChatUtilService,
         private toastr: ToastsManager,
         private notification: PushNotificationService,
+        private route: ActivatedRoute,
         private elRef: ElementRef
         )
         {
         }
 
     ngOnInit(): void {
+        console.log('chat init caledddddddddddddddd');
+
+        this.route
+        .params
+        .subscribe(params => {
+            let thread_id = params['id'];
+            if(typeof(thread_id) !== 'undefined')
+            {
+                // Find thread in list thread
+                // Check if this thread is not sync ( never load )
+                let sup = this.threadsService.currentThread.subscribe(thread => {
+                    if(!thread.is_sync)
+                    {
+                        // Get messages of logged in user with this user from server
+                        this.messageService.getMessages(thread.id)
+                            .subscribe((data) => {
+                                
+                                var messages_server:Message[] = data.Items.map((message: any) => {
+                                    return this.chatUtilService.convertMessageFromServer(message, thread, currentUser);
+                                });
+
+                                // Add messages into message service
+                                this.messageService.updates.next((messages: Message[]) => {
+                                        return messages.concat(messages_server);
+                                    });
+                            });
+
+                        thread.is_sync = true;
+                    }
+                });
+                sup.unsubscribe();
+            }
+        });
+
         this.fixWindow();
 
         this.messageService.messages.subscribe(() => ({}));
@@ -101,31 +138,16 @@ export class ChatComponent implements OnInit {
                         name: user.name
                     });
 
-                // Get messages of logged in user with this user from server
-                this.messageService.getMessages(thread_name)
-                    .subscribe((data) => {
-                        var messages_server:Message[] = data.Items.map((message: any) => {
-                            return this.chatUtilService.convertMessageFromServer(message, thread, currentUser);
-                        });
-                        
-                        // For threads don't have any messages yet
-                        // create an empty message ( for add thread )
-                        if(messages_server.length == 0)
-                        {
-                            messages_server = [new Message({
-                                    isRead: true,
-                                    thread: thread
-                                })];
-                        }
+                // create an empty message ( for add thread )
+                let messages_server = [new Message({
+                            isRead: true,
+                            thread: thread
+                        })];
 
-                        // Add messages into message service
-                        this.messageService.updates.next((messages: Message[]) => {
-                                return messages.concat(messages_server);
-                            });
+                // Add messages into message service
+                this.messageService.updates.next((messages: Message[]) => {
+                        return messages.concat(messages_server);
                     });
-
-                // this.threadsService.setCurrentThread(thread);
-
             });
         });
 
@@ -141,31 +163,16 @@ export class ChatComponent implements OnInit {
                     name: threadServer.name
                 });
 
-                // Get messages of logged in user with this user from server
-                this.messageService.getMessages(thread_name)
-                    .subscribe((data) => {
-                        var messages_server:Message[] = data.Items.map((message: any) => {
-                            return this.chatUtilService.convertMessageFromServer(message, thread, currentUser);
-                        });
-                        
-                        // For threads don't have any messages yet
-                        // create an empty message ( for add thread )
-                        if(messages_server.length == 0)
-                        {
-                            messages_server = [new Message({
-                                    isRead: true,
-                                    thread: thread
-                                })];
-                        }
+                
+                let messages_server = [new Message({
+                            isRead: true,
+                            thread: thread
+                        })];
 
-                        // Add messages into message service
-                        this.messageService.updates.next((messages: Message[]) => {
-                                return messages.concat(messages_server);
-                            });
+                // Add messages into message service
+                this.messageService.updates.next((messages: Message[]) => {
+                        return messages.concat(messages_server);
                     });
-
-                this.threadsService.setCurrentThread(thread);
-
             });
         });
 

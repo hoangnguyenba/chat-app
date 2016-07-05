@@ -1,12 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
-
+import { ROUTER_DIRECTIVES, Router }  from '@angular/router';
 import { Thread, ThreadService, MessageService, SocketService, Message } from '../../../shared';
 
 @Component({
     moduleId: module.id,
     selector: 'chat-thread',
     templateUrl: 'chat-thread.component.html',
-    styleUrls: ['chat-thread.component.css']
+    styleUrls: ['chat-thread.component.css'],
+    directives: [ROUTER_DIRECTIVES]
 })
 export class ChatThreadComponent implements OnInit {
 
@@ -14,7 +15,8 @@ export class ChatThreadComponent implements OnInit {
     selected: boolean = false;
     unreadMessagesCount: number;
 
-    constructor(private threadService: ThreadService,
+    constructor(private router: Router,
+                private threadService: ThreadService,
                 private socketService: SocketService,
                 private messageService: MessageService) {
     }
@@ -51,6 +53,9 @@ export class ChatThreadComponent implements OnInit {
             this.socketService.markThreadAsRead(this.thread);
             
         this.threadService.setCurrentThread(this.thread);
+
+        this.router.navigate(['/chat', this.thread.id.replace(':', '-')]);
+
         event.preventDefault();
     }
 

@@ -6,8 +6,7 @@ import { AuthGuard } from '../../auth.guard';
 
 export const ChatRoutes: RouterConfig = [
   {
-    path: '',
-    component: ChatComponent,
-    canActivate: [AuthGuard]
+    path: 'chat/:id',
+    component: ChatComponent
   },
 ];

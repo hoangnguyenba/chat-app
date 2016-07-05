@@ -39,10 +39,7 @@ export const BillFoldRoutes: RouterConfig = [
         path: 'history',
         component: HistoryComponent,
       },
-      {
-        path: 'chat',
-        component: ChatComponent,
-      },
+      ...ChatRoutes
     ]
   }
 ];
