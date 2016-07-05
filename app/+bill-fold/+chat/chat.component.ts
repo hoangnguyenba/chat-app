@@ -23,7 +23,7 @@ import {    UserService,
 
 @Component({
   moduleId: module.id,
-  selector: 'chat-container',
+  selector: 'chat',
   host : {
       '(window:resize)' : 'onResize()'  
     },
@@ -181,20 +181,20 @@ export class ChatComponent implements OnInit {
 
     private fixWindow()
     {
-        
-        let elHeader = this.elRef.nativeElement.children[0];
-        let elFooter = this.elRef.nativeElement.children[3];
-        let elSidebar = this.elRef.nativeElement.children[1];
-        let elMain = this.elRef.nativeElement.children[2];
-        let elSidebarMenu = elSidebar.children[0];
-        let heightWindowInder = window.innerHeight;
-        this.heightMain = elMain.offsetHeight;
-        if(heightWindowInder >= (elHeader.offsetHeight + elFooter.offsetHeight + elSidebarMenu.offsetHeight))
-        {
-            let minHeight = heightWindowInder - (elHeader.offsetHeight + elFooter.offsetHeight);      
-            elMain.style.minHeight = minHeight + 'px';
-            this.heightMain = elMain.offsetHeight;
-        }
+        // console.log(this.elRef.nativeElement);
+        // let elHeader = this.elRef.nativeElement.children[0];
+        // let elFooter = this.elRef.nativeElement.children[3];
+        // let elSidebar = this.elRef.nativeElement.children[1];
+        // let elMain = this.elRef.nativeElement.children[2];
+        // let elSidebarMenu = elSidebar.children[0];
+        // let heightWindowInder = window.innerHeight;
+        // this.heightMain = elMain.offsetHeight;
+        // if(heightWindowInder >= (elHeader.offsetHeight + elFooter.offsetHeight + elSidebarMenu.offsetHeight))
+        // {
+        //     let minHeight = heightWindowInder - (elHeader.offsetHeight + elFooter.offsetHeight);      
+        //     elMain.style.minHeight = minHeight + 'px';
+        //     this.heightMain = elMain.offsetHeight;
+        // }
     }
 
 }
