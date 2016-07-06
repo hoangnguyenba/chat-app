@@ -9,10 +9,10 @@
     'app':                        'app', // 'dist',
 
     '@angular':                   'node_modules/@angular',
-    'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
     'rxjs':                       'node_modules/rxjs',
 
     //3rd libs
+    'ng2-bootstrap':              'node_modules/ng2-bootstrap',
     'underscore':                 'node_modules/underscore',
     'angular2-jwt':               'node_modules/angular2-jwt',
     'ng2-toastr':                 'node_modules/ng2-toastr',
@@ -21,19 +21,19 @@
     // for barrels
     'shared':                     'app/shared',
     '+chat':                      'app/+admin/+chat',
-    '+chat-threads':                      'app/+admin/+chat/+chat-threads',
-    '+chat-window':                      'app/+admin/+chat/+chat-window',
-    '+login':                      'app/+login'
+    '+chat-threads':              'app/+admin/+chat/+chat-threads',
+    '+chat-window':               'app/+admin/+chat/+chat-window',
+    '+login':                     'app/+login'
   };
 
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {
     'app':                        { main: 'main.js',  defaultExtension: 'js' },
     'rxjs':                       { defaultExtension: 'js' },
-    'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
     
 
     //3rd libs
+    'ng2-bootstrap':                 { main: 'ng2-bootstrap.js', defaultExtension: 'js'},
     'underscore':                 { main: 'underscore.js', defaultExtension: 'js'},
     'angular2-jwt':                 { main: 'angular2-jwt.js', defaultExtension: 'js'},
     'ng2-toastr':              { main: 'ng2-toastr.js', defaultExtension: 'js' },

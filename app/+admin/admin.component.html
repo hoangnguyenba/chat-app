@@ -1,6 +1,6 @@
 <header class="main-header">
     <!-- Logo -->
-    <a [routerLink]="['/trigger']" class="logo">
+    <a [routerLink]="['/']" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>hat</span>
       <!-- logo for regular state and mobile devices -->
@@ -12,6 +12,30 @@
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
+
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <li class="dropdown nav-item" dropdown>
+                <a href="javascript:;" id="single-button" class="nav-link dropdown-toggle" dropdownToggle >
+                	<i class="fa fa-user"></i> {{currentUser.name}} <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="single-button">
+                    <li>
+                        <a class="dropdown-item" href="javascript:;"><i class="fa fa-fw fa-user"></i> Profile</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="javascript:;"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a class="dropdown-item" href="javascript:;" [routerLink]="['/']">
+                            <i class="fa fa-fw fa-power-off"></i> Log Out
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+      </div>
     </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->

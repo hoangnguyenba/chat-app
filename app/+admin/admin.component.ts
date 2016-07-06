@@ -5,6 +5,7 @@ import { ChatThreadsComponent } from './+chat/+chat-threads';
 
 import { JwtHelper } from 'angular2-jwt';
 import { ToastsManager } from 'ng2-toastr';
+import { DROPDOWN_DIRECTIVES } from 'ng2-bootstrap/components/dropdown';
 
 import {    UserService,
             ThreadService,
@@ -22,7 +23,7 @@ import {    UserService,
     // template: '<router-outlet></router-outlet>',
     templateUrl: 'admin.component.html',
     styleUrls: ['admin.component.css'],
-    directives: [ROUTER_DIRECTIVES, ChatThreadsComponent],
+    directives: [ROUTER_DIRECTIVES, ChatThreadsComponent, DROPDOWN_DIRECTIVES],
     host : {
       '(window:resize)' : 'onResize()'  
     }
