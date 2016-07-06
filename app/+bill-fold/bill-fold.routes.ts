@@ -25,7 +25,8 @@ export const BillFoldRoutes: RouterConfig = [
     children: [
       {
         path: '',
-        component: ChatComponent
+        pathMatch: 'full',
+        component: DashboardComponent
       },
       {
         path: 'dashboard',
@@ -39,7 +40,10 @@ export const BillFoldRoutes: RouterConfig = [
         path: 'history',
         component: HistoryComponent,
       },
-      ...ChatRoutes
+      {
+        path: 'chat/:id',
+        component: ChatComponent
+      }
     ]
   }
 ];
