@@ -9,12 +9,7 @@ import { TriggerRoutes } from './+trigger/trigger.routes';
 import { DashboardComponent } from './+dashboard/dashboard.component';
 import { TriggerComponent } from './+trigger/trigger.component';
 import { ChatRoutes } from './+chat/chat.routes';
-
-// export const AdminRoutes: RouterConfig = [
-//   ...ChatRoutes,
-//   ...HistoryRoutes,
-//   ...TriggerRoutes
-// ];
+import { DashboardRoutes } from './+dashboard/dashboard.routes';
 
 
 export const AdminRoutes: RouterConfig = [
@@ -23,23 +18,9 @@ export const AdminRoutes: RouterConfig = [
     component: AdminComponent,
     canActivate: [AuthGuard],
     children: [
-      {
-        path: '',
-        pathMatch: 'full',
-        component: DashboardComponent
-      },
-      {
-        path: 'dashboard',
-        component: DashboardComponent
-      },
-      {
-        path: 'trigger',
-        component: TriggerComponent
-      },
-      {
-        path: 'history',
-        component: HistoryComponent,
-      },
+      ...DashboardRoutes,
+      ...TriggerRoutes,
+      ...HistoryRoutes,
       {
         path: 'chat/:id',
         component: ChatComponent
