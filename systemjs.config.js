@@ -79,7 +79,6 @@
   // No umd for router yet
   packages['@angular/router'] = { main: 'index.js', defaultExtension: 'js' };
 
-  console.log(packages);
   var config = {
     map: map,
     packages: packages
