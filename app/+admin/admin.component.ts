@@ -18,16 +18,16 @@ import {    UserService,
 
 @Component({
     moduleId: module.id,
-    selector: 'bill-fold',
+    selector: 'admin',
     // template: '<router-outlet></router-outlet>',
-    templateUrl: 'bill-fold.component.html',
-    styleUrls: ['bill-fold.component.css'],
+    templateUrl: 'admin.component.html',
+    styleUrls: ['admin.component.css'],
     directives: [ROUTER_DIRECTIVES, ChatThreadsComponent],
     host : {
       '(window:resize)' : 'onResize()'  
     }
 })
-export class BillFoldComponent implements OnInit {
+export class AdminComponent implements OnInit {
     private heightMain: number = 0;
     private currentUser: User;
     constructor(
@@ -38,13 +38,9 @@ export class BillFoldComponent implements OnInit {
         private socketService: SocketService,
         private chatUtilService: ChatUtilService,
         private toastr: ToastsManager,
-        private elRef: ElementRef) { 
-            console.log('########begin 1######');
-            console.log('########end 1######');
-        }
+        private elRef: ElementRef) { }
 
     ngOnInit() { 
-        console.log('########begin######');
         this.fixWindow();
 
         this.messageService.messages.subscribe(() => ({}));
@@ -128,8 +124,6 @@ export class BillFoldComponent implements OnInit {
         this.toastr.success('Welcome back ' + this.currentUser.name);
 
         this.socketService.start();
-
-        console.log('########end######');
     }
 
     onResize() {

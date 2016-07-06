@@ -20,9 +20,9 @@
 
     // for barrels
     'shared':                     'app/shared',
-    '+chat':                      'app/+bill-fold/+chat',
-    '+chat-threads':                      'app/+bill-fold/+chat/+chat-threads',
-    '+chat-window':                      'app/+bill-fold/+chat/+chat-window',
+    '+chat':                      'app/+admin/+chat',
+    '+chat-threads':                      'app/+admin/+chat/+chat-threads',
+    '+chat-window':                      'app/+admin/+chat/+chat-window',
     '+login':                      'app/+login'
   };
 
