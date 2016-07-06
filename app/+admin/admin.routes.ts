@@ -6,10 +6,10 @@ import { AdminComponent } from './admin.component';
 import { HistoryRoutes } from './+history/history.routes';
 import { HistoryComponent } from './+history/history.component';
 import { TriggerRoutes } from './+trigger/trigger.routes';
-import { DashboardComponent } from './+dashboard/dashboard.component';
 import { TriggerComponent } from './+trigger/trigger.component';
 import { ChatRoutes } from './+chat/chat.routes';
 import { DashboardRoutes } from './+dashboard/dashboard.routes';
+import { SettingRoutes } from './+setting/setting.routes';
 
 
 export const AdminRoutes: RouterConfig = [
@@ -21,6 +21,7 @@ export const AdminRoutes: RouterConfig = [
       ...DashboardRoutes,
       ...TriggerRoutes,
       ...HistoryRoutes,
+      ...SettingRoutes,
       {
         path: 'chat/:id',
         component: ChatComponent
