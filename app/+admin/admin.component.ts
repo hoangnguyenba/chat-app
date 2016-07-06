@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 
-import { ROUTER_DIRECTIVES }  from '@angular/router';
+import { ROUTER_DIRECTIVES, Router }  from '@angular/router';
 import { ChatThreadsComponent } from './+chat/+chat-threads';
 
 import { JwtHelper } from 'angular2-jwt';
@@ -32,6 +32,7 @@ export class AdminComponent implements OnInit {
     private heightMain: number = 0;
     private currentUser: User;
     constructor(
+        private router: Router,
         private jwtHelper: JwtHelper,
         private messageService: MessageService,
         private userService: UserService,
@@ -153,4 +154,8 @@ export class AdminComponent implements OnInit {
         }
     }
 
+    public logout() {
+        localStorage.removeItem('id_token');
+        this.router.navigate(['/login']);
+    }
 }
