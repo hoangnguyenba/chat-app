@@ -12,6 +12,7 @@
     'rxjs':                       'node_modules/rxjs',
 
     //3rd libs
+    'moment':                     'node_modules/moment',
     'ng2-bootstrap':              'node_modules/ng2-bootstrap',
     'underscore':                 'node_modules/underscore',
     'angular2-jwt':               'node_modules/angular2-jwt',
@@ -33,6 +34,7 @@
     
 
     //3rd libs
+    'moment':                 { main: 'moment.js', defaultExtension: 'js'},
     'ng2-bootstrap':                 { main: 'ng2-bootstrap.js', defaultExtension: 'js'},
     'underscore':                 { main: 'underscore.js', defaultExtension: 'js'},
     'angular2-jwt':                 { main: 'angular2-jwt.js', defaultExtension: 'js'},

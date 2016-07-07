@@ -2,31 +2,34 @@
         <!-- /.col -->
         <div class="col-md-12">
             <tabset class="nav-tabs-custom" [justified]="true">
+                
+                <tab heading="Language">
+
+                    <form class="form-horizontal">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="language" class="col-sm-2 control-label">Language</label>
+
+                                <div class="col-sm-10">
+                                    <select id="language"  class="form-control select2" [(ngModel)]="optionService.language" >
+                                        <option value="en">English</option>
+                                        <option value="jp">Japanese</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </tab>
+
                 <tab heading="Notification">
                     <div class="checkbox">
                         <label>
-                        <input type="checkbox"> Turn on notification
+                        <input [(ngModel)]="optionService.isNotification" type="checkbox"> Turn on notification
                         </label>
                     </div>
                 </tab>
-                <tab heading="Language">
 
-                    <div class="form-group">
-                        <div class="radio">
-                            <label>
-                            <input type="radio" name="language" value="japanese" checked="">
-                            Japanese
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                            <input type="radio" name="language" value="english">
-                            English
-                            </label>
-                        </div>
-                    </div>
-
-                </tab>
             </tabset>
         </div>
         <!-- /.col -->

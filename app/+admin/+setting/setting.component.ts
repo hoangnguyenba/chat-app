@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { TAB_DIRECTIVES } from 'ng2-bootstrap/components/tabs';
 
+import { OptionService } from '../../shared';
+
 @Component({
     moduleId: module.id,
     selector: 'setting',
@@ -9,8 +11,17 @@ import { TAB_DIRECTIVES } from 'ng2-bootstrap/components/tabs';
     directives: [TAB_DIRECTIVES]
 })
 export class SettingComponent implements OnInit {
-    constructor() { }
+
+    public languages = {
+        en : 'English',
+        jp: 'Japanese'
+    };
+
+    public selectedLanguage = 'en';
+
+    constructor(
+        public optionService: OptionService
+    ) { }
 
     ngOnInit() { }
-
 }

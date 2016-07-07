@@ -1,11 +1,13 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewContainerRef } from '@angular/core';
 
 import { ROUTER_DIRECTIVES, Router }  from '@angular/router';
 import { ChatThreadsComponent } from './+chat/+chat-threads';
 
 import { JwtHelper } from 'angular2-jwt';
 import { ToastsManager } from 'ng2-toastr';
+import { TAB_DIRECTIVES } from 'ng2-bootstrap/components/tabs';
 import { DROPDOWN_DIRECTIVES } from 'ng2-bootstrap/components/dropdown';
+import { MODAL_DIRECTVES, BS_VIEW_PROVIDERS } from 'ng2-bootstrap';
 
 import {    UserService,
             ThreadService,
@@ -15,7 +17,8 @@ import {    UserService,
             User,
             SocketService,
             ChatUtilService,
-            PushNotificationService } from '../shared';
+            PushNotificationService,
+            OptionService } from '../shared';
 
 @Component({
     moduleId: module.id,
@@ -23,7 +26,8 @@ import {    UserService,
     // template: '<router-outlet></router-outlet>',
     templateUrl: 'admin.component.html',
     styleUrls: ['admin.component.css'],
-    directives: [ROUTER_DIRECTIVES, ChatThreadsComponent, DROPDOWN_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, ChatThreadsComponent, DROPDOWN_DIRECTIVES, MODAL_DIRECTVES, TAB_DIRECTIVES],
+    viewProviders: [BS_VIEW_PROVIDERS],
     host : {
       '(window:resize)' : 'onResize()'  
     }
@@ -39,6 +43,7 @@ export class AdminComponent implements OnInit {
         private threadsService: ThreadService,
         private socketService: SocketService,
         private chatUtilService: ChatUtilService,
+        private optionService: OptionService,
         private toastr: ToastsManager,
         private elRef: ElementRef) { }
 

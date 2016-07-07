@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Http, Response, HTTP_PROVIDERS } from '@angular/http';
 import { Injector, ReflectiveInjector } from '@angular/core';
 
@@ -13,4 +13,5 @@ import { ROUTER_DIRECTIVES }  from '@angular/router';
     directives: [ROUTER_DIRECTIVES]
 })
 export class AppComponent {  
+    constructor(private viewContainerRef:ViewContainerRef) {}
 }
