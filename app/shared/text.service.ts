@@ -50,6 +50,10 @@ export class TextService {
         japanese: {
             'en': 'Japanese',
             'jp': '日本語'
+        },
+        setting: {
+            'en': 'Setting',
+            'jp': '設定'
         }
     };
 
