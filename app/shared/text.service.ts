@@ -28,8 +28,28 @@ export class TextService {
             'jp': 'メニュー'
         },
         friends: {
-            'en': 'friends',
+            'en': 'Friends',
             'jp': '友人'
+        },
+        notification: {
+            'en': 'Notification',
+            'jp': 'お知らせ'
+        },
+        turn_on_notification: {
+            'en': 'Turn on notification',
+            'jp': '通知をオンにします'
+        },
+        language: {
+            'en': 'Language',
+            'jp': '言語'
+        },
+        english: {
+            'en': 'English',
+            'jp': 'English'
+        },
+        japanese: {
+            'en': 'Japanese',
+            'jp': '日本語'
         }
     };
 
