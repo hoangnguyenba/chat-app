@@ -18,7 +18,12 @@ import {    UserService,
 
 import { APP_CONFIG, CHAT_APP_CONFIG, AppConfig } from './config';
 
-import { ToastsManager } from 'ng2-toastr';
+import { ToastsManager, ToastOptions } from 'ng2-toastr';
+
+let options = {
+    positionClass: 'toast-bottom-right',
+};
+
 
 bootstrap(AppComponent, [   
                             HTTP_PROVIDERS,
@@ -32,6 +37,7 @@ bootstrap(AppComponent, [
                             UserService,
                             ThreadService,
                             SocketService,
+                            provide(ToastOptions, { useValue: new ToastOptions(options)}),
                             ToastsManager,
                             PageVisibilityService,
                             // PushNotificationService
