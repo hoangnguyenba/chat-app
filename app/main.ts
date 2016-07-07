@@ -20,11 +20,6 @@ import { APP_CONFIG, CHAT_APP_CONFIG, AppConfig } from './config';
 
 import { ToastsManager, ToastOptions } from 'ng2-toastr';
 
-let options = {
-    positionClass: 'toast-bottom-right',
-};
-
-
 bootstrap(AppComponent, [   
                             HTTP_PROVIDERS,
                             AUTH_PROVIDERS,
@@ -37,7 +32,11 @@ bootstrap(AppComponent, [
                             UserService,
                             ThreadService,
                             SocketService,
-                            provide(ToastOptions, { useValue: new ToastOptions(options)}),
+                            provide(ToastOptions, { 
+                                useValue: new ToastOptions({
+                                    positionClass: 'toast-bottom-right',
+                                })
+                            }),
                             ToastsManager,
                             PageVisibilityService,
                             // PushNotificationService
