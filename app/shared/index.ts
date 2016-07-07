@@ -10,4 +10,5 @@ export * from './chat-util'
 export * from './notification.service';
 export * from './page-visibility.service';
 export * from './option.service';
+export * from './text.service';
 export * from './socket.service';

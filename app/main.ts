@@ -15,7 +15,8 @@ import {    UserService,
             PushNotificationService,
             NotificationConfig,
             PageVisibilityService,
-            OptionService } from './shared';
+            OptionService,
+            TextService } from './shared';
 
 import { APP_CONFIG, CHAT_APP_CONFIG, AppConfig } from './config';
 
@@ -41,6 +42,7 @@ bootstrap(AppComponent, [
                             ToastsManager,
                             PageVisibilityService,
                             OptionService,
+                            TextService,
                             // PushNotificationService
                             provide(PushNotificationService, { 
                                 useFactory: () => {

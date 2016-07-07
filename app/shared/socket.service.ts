@@ -4,7 +4,8 @@ import { APP_CONFIG, AppConfig } from '../config';
 import { ThreadService, MessageService, UserService, ChatUtilService, Message, User, Thread,
     PushNotificationService,
     PageVisibilityService,
-    NotificationConfig
+    NotificationConfig,
+    OptionService
 } from '../shared';
 
 import * as _ from 'underscore';
@@ -27,7 +28,8 @@ export class SocketService {
                 private chatUtilService: ChatUtilService,
                 private userService: UserService,
                 private notificationService: PushNotificationService,
-                private pageVisibilityService: PageVisibilityService
+                private pageVisibilityService: PageVisibilityService,
+                private optionService: OptionService
                 )
      { 
         this.socket = new io(this.config.apiEndpoint);
@@ -61,7 +63,7 @@ export class SocketService {
         this.messageService.newMessages.next(message);
 
         // Check if Chat App is not active, show notification
-        if(!this.pageVisibilityService.isVisible())
+        if(!this.pageVisibilityService.isVisible() && this.optionService.isNotification)
         {
             this.notificationService.text(message.text);
         }

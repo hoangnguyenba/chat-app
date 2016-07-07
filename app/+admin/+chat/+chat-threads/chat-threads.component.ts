@@ -7,7 +7,7 @@ import {
 import { Observable } from 'rxjs/Observable';
 
 import { APP_CONFIG, AppConfig } from '../../../config';
-import { ThreadService, MessageService, Thread, Message } from '../../../shared';
+import { TextService, ThreadService, MessageService, Thread, Message } from '../../../shared';
 import { ChatThreadComponent } from './chat-thread.component';
 
 @Component({
@@ -24,6 +24,7 @@ export class ChatThreadsComponent implements OnInit {
 
   constructor(private threadService: ThreadService,
               private messageService: MessageService,
+              private textService: TextService,
               @Inject(APP_CONFIG) private config:AppConfig) {
     this.threads = threadService.orderedThreads;
   }

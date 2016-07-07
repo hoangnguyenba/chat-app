@@ -18,7 +18,8 @@ import {    UserService,
             SocketService,
             ChatUtilService,
             PushNotificationService,
-            OptionService } from '../shared';
+            OptionService,
+            TextService } from '../shared';
 
 @Component({
     moduleId: module.id,
@@ -44,6 +45,7 @@ export class AdminComponent implements OnInit {
         private socketService: SocketService,
         private chatUtilService: ChatUtilService,
         private optionService: OptionService,
+        private textService: TextService,
         private toastr: ToastsManager,
         private elRef: ElementRef) { }
 

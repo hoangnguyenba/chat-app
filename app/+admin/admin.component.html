@@ -4,7 +4,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>hat</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Chat App</b></span>
+      <span class="logo-lg"><b>{{textService.get('app_name')}}</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -43,17 +43,17 @@
       <!-- sidebar: style can be found in sidebar.less -->
       <section class="sidebar">
       <ul class="sidebar-menu">
-        <li class="header">Menu</li>
+        <li class="header">{{textService.get('menu')}}</li>
         <li>
-            <a [routerLink]="['/dashboard']"><i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            <a [routerLink]="['/dashboard']"><i class="fa fa-dashboard"></i> <span>{{textService.get('dashboard')}}</span>
             </a>
         </li>
         <li>
-            <a [routerLink]="['/history']"><i class="fa fa-history"></i> <span>History</span>
+            <a [routerLink]="['/history']"><i class="fa fa-history"></i> <span>{{textService.get('history')}}</span>
             </a>
         </li>
         <li>
-            <a [routerLink]="['/trigger']"><i class="fa fa-shopping-cart"></i> <span>Trigger</span>
+            <a [routerLink]="['/trigger']"><i class="fa fa-shopping-cart"></i> <span>{{textService.get('trigger')}}</span>
             </a>
         </li>
       </ul>

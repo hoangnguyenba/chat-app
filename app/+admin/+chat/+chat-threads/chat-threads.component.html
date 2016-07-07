@@ -9,7 +9,7 @@
 
 
 <ul class="sidebar-menu">
-  <li class="header">Friends
+  <li class="header">{{textService.get('friends')}}
     <small *ngIf="unreadMessagesCount > 0" class="label pull-right bg-red">{{unreadMessagesCount}}</small>
   </li>
   <chat-thread *ngFor="let thread of threads | async" [thread]="thread"></chat-thread>
