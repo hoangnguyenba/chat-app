@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col-md-12" *ngIf="dataIdle && dataIdle.length > 0">
+        <visit-table [data]="dataIdle" [title]="'Online'"></visit-table>
+    </div>
+    <div class="col-md-12" *ngIf="dataIncoming && dataIncoming.length > 0">
+        <visit-table [data]="dataIncoming" [title]="'Incoming Messages'"></visit-table>
+    </div>
+    <div class="col-md-12" *ngIf="dataServed && dataServed.length > 0">
+        <visit-table [data]="dataServed" [title]="'Served'"></visit-table>
+    </div>
+</div>

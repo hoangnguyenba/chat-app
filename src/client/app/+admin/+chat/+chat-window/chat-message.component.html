@@ -1,0 +1,15 @@
+<div *ngIf="message.author">
+
+    <div *ngFor="let m of _messages" class="item">
+        <img *ngIf="isNewAuthor()" [src]="m.author.logo" alt="{{m.author.name}}">
+
+        <p class="message" [class.first_message]="isNewAuthor()">
+            <a *ngIf="isNewAuthor()" href="#" class="name">
+            <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> {{m.sentAt | date:"h:m"}}</small>
+            {{m.author.name}}
+            </a>
+            {{m.text}}
+        </p>
+    </div>
+
+</div>

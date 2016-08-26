@@ -1,0 +1,31 @@
+<div class="login-box">
+	<div class="login-logo">
+		<b>Admin</b>
+	</div>
+	<!-- /.login-logo -->
+	<div class="login-box-body">
+		<p class="login-box-msg">Login to start your session</p>
+		<form  role="form" (submit)="login($event, username.value, password.value)">
+			<div class="form-group has-feedback">
+				<input type="text" #username class="form-control" name="username" placeholder="Username">
+				<span class="glyphicon glyphicon-user form-control-feedback"></span>
+			</div>
+			<div class="form-group has-feedback">
+				<input type="password" #password class="form-control" name="password" placeholder="Password">
+				<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+			</div>
+			<div class="row">
+				<div class="col-xs-8">
+					
+				</div>
+				<!-- /.col -->
+				<div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
+				</div>
+				<!-- /.col -->
+			</div>
+		</form>
+	</div>
+	<!-- /.login-box-body -->
+</div>
+

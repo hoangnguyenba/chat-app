@@ -1,0 +1,44 @@
+.user-panel > .image > img
+{
+    height: 45px;
+    width: 45px;
+}
+
+.search-form {
+    border-radius: 3px;
+    border: 1px solid #374850;
+    background-color: #374850;
+    margin-top: 5px;
+}
+
+.search-form input[type="text"] {
+    color: #666;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 2px;
+}
+
+.search-form input[type="text"], .search-form .btn {
+    box-shadow: none;
+    background-color: #374850;
+    border: 1px solid transparent;
+    height: 35px;
+    -webkit-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+.search-form input[type="text"]:focus,
+.search-form input[type="text"]:focus + .input-group-btn .btn {
+  background-color: #fff;
+  color: #666;
+}
+.search-form input[type="text"]:focus + .input-group-btn .btn {
+  border-left-color: #fff;
+}
+.avatar-size img{
+    max-width: 30px;
+    max-height: 30px;
+}
+

@@ -1,0 +1,8 @@
+<chat-message
+    *ngFor="let message of messages; let i=index"
+    [message]="message"
+    (updatedLastAuthor)="onUpdateLastAuthor($event)"
+    [lastAuthor]="lastAuthor"
+    [index]="i"
+    >
+</chat-message>

@@ -1,0 +1,48 @@
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">{{title}}</h3>
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-sm-6"></div>
+            <div class="col-sm-6">
+                <div class="dataTables_filter">
+                    <label for="">Search
+                        <input class="form-control input-sm" *ngIf="config.filtering" placeholder="Filter"
+                                [ngTableFiltering]="config.filtering"
+                                (tableChanged)="onChangeTable(config)"/>
+                    </label>
+                </div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <ng-table [config]="config.sorting"
+                    (tableChanged)="onChangeTable(config)"
+                    [rows]="rows" [columns]="columns"
+                    (selectedRow)="onSelectRow($event)">
+                </ng-table>
+            </div>
+        </div>
+        <div class="row" *ngIf="length > itemsPerPage">
+            <div class="col-sm-5"></div>
+            <div class="col-sm-7">
+                <div class="dataTables_paginate paging_simple_numbers">
+                    <pagination ngDefaultControl *ngIf="config.paging"
+                        class="pagination-sm"
+                        [(ngModel)]="page"
+                        [totalItems]="length"
+                        [itemsPerPage]="itemsPerPage"
+                        [maxSize]="maxSize"
+                        [boundaryLinks]="true"
+                        [rotate]="false"
+                        (pageChanged)="onChangeTable(config, $event)"
+                        (numPages)="numPages = $event">
+                    </pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

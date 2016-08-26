@@ -1,0 +1,10 @@
+<!--<li class="list-group-item" (click)="clicked($event)" [class.active]="selected">
+    <span *ngIf="unreadMessagesCount > 0" class="badge">{{unreadMessagesCount}}</span>
+    {{thread.name}}
+</li>-->
+
+<li [class.active]="selected && chatUtilService.isSelectedChat" (click)="clicked($event)">
+    <a href="#"><i class="fa fa-circle" [ngClass]="status()"></i> <span>{{thread.name}}</span>
+    <small *ngIf="unreadMessagesCount > 0" class="label pull-right bg-red">{{unreadMessagesCount}}</small>
+    </a>
+</li>

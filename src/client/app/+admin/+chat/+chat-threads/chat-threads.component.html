@@ -1,0 +1,11 @@
+<ul class="sidebar-menu chat-thread-sidebar">
+  <li class="header">{{textService.get('admins')}}
+    <small *ngIf="unreadMessagesCount > 0" class="label pull-right bg-red">{{unreadMessagesCount}}</small>
+  </li>
+  <chat-thread *ngFor="let thread of threads | async" [thread]="thread"></chat-thread>
+
+  <!--<li class="header">Serve Requests
+    <small *ngIf="unreadServeMessagesCount > 0" class="label pull-right bg-red">{{unreadServeMessagesCount}}</small>
+  </li>
+  <chat-thread *ngFor="let thread of serveThreads | async" [thread]="thread"></chat-thread>-->
+</ul>
