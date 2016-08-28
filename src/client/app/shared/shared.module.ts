@@ -14,6 +14,7 @@ import { OptionService } from './option.service';
 import { TextService } from './text.service';
 import { SocketService } from './socket.service';
 import { ToastsManager, ToastOptions } from 'ng2-toastr';
+
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */

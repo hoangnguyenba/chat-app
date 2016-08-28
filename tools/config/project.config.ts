@@ -14,6 +14,7 @@ export class ProjectConfig extends SeedConfig {
       // 'node_modules/bootstrap/dist/fonts/**',
       'node_modules/font-awesome/fonts/**'
   ];
+
   constructor() {
     super();
     // this.APP_TITLE = 'Put name of your app here';

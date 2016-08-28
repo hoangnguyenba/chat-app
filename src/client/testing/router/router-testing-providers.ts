@@ -3,6 +3,7 @@ temporary mock router provider until @angular provides one (currently not export
 copied from https://raw.githubusercontent.com/springboot-angular2-tutorial/angular2-app/master/src/shared/routes/router-testing-providers.ts
 */
 
+
 import {Location, LocationStrategy} from '@angular/common';
 import {
   RouterOutletMap,
@@ -42,3 +43,4 @@ export const provideFakeRouter = (rootComponentType: Type, config: RouterConfig 
     },
   ];
 };
+

@@ -94,7 +94,8 @@ npm start -- --port 8080 --reload-port 4000 --base /my-app/
 
 ## Environment configuration
 
-If you have different environments and you need to configure them to use different end points, settings, etc. you can use the `./tools/env/config.json` file. The keys in the file are the different environments.
+
+If you have different environments and you need to configure them to use different end points, settings, etc. you can use the files `dev.ts` or `prod.ts` in`./tools/env/`. The name of the file is environment you want to use.
 
 The can be specified by using:
 
@@ -102,7 +103,7 @@ The can be specified by using:
 npm start -- --config-env ENV_NAME
 ```
 
-Currently the `ENV_NAME`s are `dev`, `prod`, `staging`, but you can simply add different key-value pairs to the `config.json` file in order to alter extra such environments.
+Currently the `ENV_NAME`s are `dev`, `prod`, `staging`, but you can simply add a different file `"ENV_NAME.ts".` file in order to alter extra such environments.
 
 # Tools documentation
 
@@ -117,9 +118,15 @@ Visit the [Wiki page](https://github.com/mgechev/angular2-seed/wiki) of the proj
 ```bash
 npm test
 
-# Debug - In two different shell windows
-npm run build.test.watch      # 1st window
-npm run karma.start           # 2nd window
+# Development. Your app will be watched by karma
+# on each change all your specs will be executed.
+npm run test.watch
+# NB: The command above might fail with a "EMFILE: too many open files" error.
+# Some OS have a small limit of opened file descriptors (256) by default
+# and will result in the EMFILE error.
+# You can raise the maximum of file descriptors by running the command below:
+ulimit -n 10480
+
 
 # code coverage (istanbul)
 # auto-generated at the end of `npm test`
@@ -370,7 +377,10 @@ Forks of this project demonstrate how to extend and integrate with other librari
 :---: |:---: |:---: |:---: |:---: |:---: |
 [mgechev](https://github.com/mgechev) |[ludohenin](https://github.com/ludohenin) |[d3viant0ne](https://github.com/d3viant0ne) |[Shyam-Chen](https://github.com/Shyam-Chen) |[tarlepp](https://github.com/tarlepp) |[NathanWalker](https://github.com/NathanWalker) |
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> b9856de9240041e73ba71c6227e45b268deefcf6
 [<img alt="TheDonDope" src="https://avatars.githubusercontent.com/u/1188033?v=3&s=117" width="117">](https://github.com/TheDonDope) |[<img alt="nareshbhatia" src="https://avatars.githubusercontent.com/u/1220198?v=3&s=117" width="117">](https://github.com/nareshbhatia) |[<img alt="hank-ehly" src="https://avatars.githubusercontent.com/u/11639738?v=3&s=117" width="117">](https://github.com/hank-ehly) |[<img alt="kiuka" src="https://avatars.githubusercontent.com/u/11283191?v=3&s=117" width="117">](https://github.com/kiuka) |[<img alt="jesperronn" src="https://avatars.githubusercontent.com/u/6267?v=3&s=117" width="117">](https://github.com/jesperronn) |[<img alt="vyakymenko" src="https://avatars.githubusercontent.com/u/7300673?v=3&s=117" width="117">](https://github.com/vyakymenko) |
 :---: |:---: |:---: |:---: |:---: |:---: |
 [TheDonDope](https://github.com/TheDonDope) |[nareshbhatia](https://github.com/nareshbhatia) |[hank-ehly](https://github.com/hank-ehly) |[kiuka](https://github.com/kiuka) |[jesperronn](https://github.com/jesperronn) |[vyakymenko](https://github.com/vyakymenko) |
